@@ -1,0 +1,273 @@
+muhammad-ahsan@Muhammad-Ahsan:~$ sudo mysql -u root -p 
+[sudo] password for muhammad-ahsan: 
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 4
+Server version: 5.7.25-0ubuntu0.16.04.2 (Ubuntu)
+
+Copyright (c) 2000, 2019, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> 
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| Themepark          |
+| employees          |
+| magento            |
+| magento2           |
+| mysql              |
+| nuces              |
+| performance_schema |
+| pharma             |
+| sys                |
+| testDB             |
++--------------------+
+11 rows in set (1.57 sec)
+
+mysql> create DataBase DBLab;
+Query OK, 1 row affected (0.14 sec)
+
+mysql> use DBLab
+Database changed
+mysql> 
+mysql> show tables;
+Empty set (0.00 sec)
+
+mysql> use task1;
+Database changed
+mysql> create table customer(
+    ->      customerid int(10) PRIMARY KEY,
+    ->      f_name varchar(20) not null,
+    ->      l_name varchar(20) not null,
+    ->      city varchar(20) not null,
+    ->      country varchar(20) not null,
+    ->      phone varchar(25) not null);
+Query OK, 0 rows affected (3.23 sec)
+
+mysql> s
+mysql> create table orders(
+    ->     id int(10) PRIMARY KEY,
+    ->      orderdate date not null,
+    ->      orderno int(10) not null,
+    ->      customerid int(10),
+    ->      totalamount int(30) not null,
+    ->      constraint fk_order_customer FOREIGN KEY(customerid)
+    ->      REFERENCES customer(customerid));
+Query OK, 0 rows affected (0.68 sec)
+
+mysql> insert into customer(customerid,f_name,l_name,city,country,phone) values (111,'zain','ali','lahore','Pakistan','0312-1234567');
+Query OK, 1 row affected (0.23 sec)
+
+mysql> insert into customer(customerid,f_name,l_name,city,country,phone) values (11,'abdullah','khan','multan','Pakistan','0312-1234567');
+Query OK, 1 row affected (0.30 sec)
+
+mysql> insert into customer(customerid,f_name,l_name,city,country,phone) values (22,'muhammad','ahsan','gujjrat','Pakistan','0312-1234567');
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into customer(customerid,f_name,l_name,city,country,phone) values (33,'mirza','ali','aa','london','0312-1232007');
+Query OK, 1 row affected (0.23 sec)
+
+mysql> insert into customer(customerid,f_name,l_name,city,country,phone) values (44,'faryal','ishfaq','mumbai','india','0311-1234567');
+Query OK, 1 row affected (0.33 sec)
+
+mysql> insert into customer(customerid,f_name,l_name,city,country,phone) values (55,'muhammad','nauman','peshawar','pakistan','0321-7654321');
+Query OK, 1 row affected (0.18 sec)
+
+mysql> insert into customer(customerid,f_name,l_name,city,country,phone) values (66,'malik','subhan','quetta','pakistan','0301-1234321');
+Query OK, 1 row affected (0.10 sec)
+
+mysql> insert into customer(customerid,f_name,l_name,city,country,phone) values (77,'mushahid','ali','gujjrat','pakistan','0300-1004321');
+Query OK, 1 row affected (0.18 sec)
+
+mysql> insert into customer(customerid,f_name,l_name,city,country,phone) values (88,'raza','ali','shangai','china','0300-10340321');
+Query OK, 1 row affected (0.10 sec)
+
+mysql> insert into customer(customerid,f_name,l_name,city,country,phone) values (99,'tehseen','khan','sa','USA','0300-1000021');
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into customer(customerid,f_name,l_name,city,country,phone) values (100,'ayesha','aziz','kor','USA','0350-1654361');
+Query OK, 1 row affected (0.11 sec)
+
+mysql> insert into customer(customerid,f_name,l_name,city,country,phone) values (101,'jannat','zubair','jallandar','india','0350-1611361');
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into customer(customerid,f_name,l_name,city,country,phone) values (102,'ayan','fakhar','multan','pakistan','0350-1221361');
+Query OK, 1 row affected (0.10 sec)
+
+mysql> insert into customer(customerid,f_name,l_name,city,country,phone) values (103,'arbaz','khan','multan','pakistan','0316-1288891');
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into customer(customerid,f_name,l_name,city,country,phone) values (104,'ali','muzahir','peshawar','pakistan','0316-0088891');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into customer(customerid,f_name,l_name,city,country,phone) values (105,'hassan','tariq','gg','nepal','0311-9876543');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into customer(customerid,f_name,l_name,city,country,phone) values (106,'muhammad','waqas','aas','china','0311-9870030');
+Query OK, 1 row affected (0.10 sec)
+
+mysql> insert into customer(customerid,f_name,l_name,city,country,phone) values (107,'nadeem','ahsan','pakhtunwa','pakistan','0311-0000000');
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into customer(customerid,f_name,l_name,city,country,phone) values (108,'jinnah','azam','qq','pakistan','0300-0000000');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into customer(customerid,f_name,l_name,city,country,phone) values (109,'quaid-e','azam','multan','pakistan','0300-0000111');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> select * from customer;
++------------+----------+---------+-----------+----------+---------------+
+| customerid | f_name   | l_name  | city      | country  | phone         |
++------------+----------+---------+-----------+----------+---------------+
+|         11 | abdullah | khan    | multan    | Pakistan | 0312-1234567  |
+|         22 | muhammad | ahsan   | gujjrat   | Pakistan | 0312-1234567  |
+|         33 | mirza    | ali     | aa        | london   | 0312-1232007  |
+|         44 | faryal   | ishfaq  | mumbai    | india    | 0311-1234567  |
+|         55 | muhammad | nauman  | peshawar  | pakistan | 0321-7654321  |
+|         66 | malik    | subhan  | quetta    | pakistan | 0301-1234321  |
+|         77 | mushahid | ali     | gujjrat   | pakistan | 0300-1004321  |
+|         88 | raza     | ali     | shangai   | china    | 0300-10340321 |
+|         99 | tehseen  | khan    | sa        | USA      | 0300-1000021  |
+|        100 | ayesha   | aziz    | kor       | USA      | 0350-1654361  |
+|        101 | jannat   | zubair  | jallandar | india    | 0350-1611361  |
+|        102 | ayan     | fakhar  | multan    | pakistan | 0350-1221361  |
+|        103 | arbaz    | khan    | multan    | pakistan | 0316-1288891  |
+|        104 | ali      | muzahir | peshawar  | pakistan | 0316-0088891  |
+|        105 | hassan   | tariq   | gg        | nepal    | 0311-9876543  |
+|        106 | muhammad | waqas   | aas       | china    | 0311-9870030  |
+|        107 | nadeem   | ahsan   | pakhtunwa | pakistan | 0311-0000000  |
+|        108 | jinnah   | azam    | qq        | pakistan | 0300-0000000  |
+|        109 | quaid-e  | azam    | multan    | pakistan | 0300-0000111  |
+|        111 | zain     | ali     | lahore    | Pakistan | 0312-1234567  |
++------------+----------+---------+-----------+----------+---------------+
+20 rows in set (0.04 sec)
+
+mysql> insert into orders(id,orderdate,orderno,customerid,totalamount) values (1,str_to_date('02,dec,14','%d,%b,%y'),1,11,1000);
+Query OK, 1 row affected (0.73 sec)
+
+mysql> insert into orders(id,orderdate,orderno,customerid,totalamount) values (2,str_to_date('03,dec,14','%d,%b,%y'),2,111,2000);
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into orders(id,orderdate,orderno,customerid,totalamount) values (3,str_to_date('04,dec,14','%d,%b,%y'),3,107,3000);
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into orders(id,orderdate,orderno,customerid,totalamount) values (4,str_to_date('05,dec,14','%d,%b,%y'),4,100,3000);
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into orders(id,orderdate,orderno,customerid,totalamount) values (5,str_to_date('06,dec,14','%d,%b,%y'),5,100,4000);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into orders(id,orderdate,orderno,customerid,totalamount) values (6,str_to_date('07,dec,14','%d,%b,%y'),6,109,1100);
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into orders(id,orderdate,orderno,customerid,totalamount) values (7,str_to_date('08,dec,14','%d,%b,%y'),7,33,1100);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> select * from orders;
++----+------------+---------+------------+-------------+
+| id | orderdate  | orderno | customerid | totalamount |
++----+------------+---------+------------+-------------+
+|  1 | 2014-12-02 |       1 |         11 |        1000 |
+|  2 | 2014-12-03 |       2 |        111 |        2000 |
+|  3 | 2014-12-04 |       3 |        107 |        3000 |
+|  4 | 2014-12-05 |       4 |        100 |        3000 |
+|  5 | 2014-12-06 |       5 |        100 |        4000 |
+|  6 | 2014-12-07 |       6 |        109 |        1100 |
+|  7 | 2014-12-08 |       7 |         33 |        1100 |
++----+------------+---------+------------+-------------+
+7 rows in set (0.00 sec)
+
+mysql> select count(*) from customer group by country having count(*) > 10;
++----------+
+| count(*) |
++----------+
+|       12 |
++----------+
+1 row in set (0.14 sec)
+
+mysql> select count(*),country from customer where country <> 'USA' group by country having count(*) >= 9 order by count(*) desc;
++----------+----------+
+| count(*) | country  |
++----------+----------+
+|       12 | Pakistan |
++----------+----------+
+1 row in set (0.02 sec)
+
+
+mysql> select country,city,count(customerid)
+    -> from customer
+    -> group by country, city;
++----------+-----------+-------------------+
+| country  | city      | count(customerid) |
++----------+-----------+-------------------+
+| china    | aas       |                 1 |
+| china    | shangai   |                 1 |
+| india    | jallandar |                 1 |
+| india    | mumbai    |                 1 |
+| london   | aa        |                 1 |
+| nepal    | gg        |                 1 |
+| Pakistan | gujjrat   |                 2 |
+| Pakistan | lahore    |                 1 |
+| Pakistan | multan    |                 4 |
+| pakistan | pakhtunwa |                 1 |
+| pakistan | peshawar  |                 2 |
+| pakistan | qq        |                 1 |
+| pakistan | quetta    |                 1 |
+| USA      | kor       |                 1 |
+| USA      | sa        |                 1 |
++----------+-----------+-------------------+
+15 rows in set (0.03 sec)
+
+mysql> select max(orderno) as total_order from orders;
++-------------+
+| total_order |
++-------------+
+|           7 |
++-------------+
+1 row in set (0.12 sec)
+
+mysql> select customerid,count(*) as total_order from orders group by customerid;
++------------+-------------+
+| customerid | total_order |
++------------+-------------+
+|         11 |           1 |
+|         33 |           1 |
+|        100 |           2 |
+|        107 |           1 |
+|        109 |           1 |
+|        111 |           1 |
++------------+-------------+
+6 rows in set (0.00 sec)
+
+mysql> select customer.customerid from customer,orders where customer.customerid = orders.customerid group by customer.customerid having sum(totalamount) >= all(select sum(totalamount) from orders group by orders.customerid);
++------------+
+| customerid |
++------------+
+|        100 |
++------------+
+1 row in set (0.23 sec)
+
+mysql> SELECT customer.customerid FROM customer,orders where customer.customerid=orders.customerid group by customer.customerid having sum(totalamount)<=all(select sum(totalamount) from orders group by orders.customerid);
++------------+
+| customerid |
++------------+
+|         11 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select orderdate from orders group by orderdate having sum(totalamount)>=all(select sum(totalamount) from orders group by orderdate);
++------------+
+| orderdate  |
++------------+
+| 2014-12-06 |
++------------+
+1 row in set (0.00 sec)
+

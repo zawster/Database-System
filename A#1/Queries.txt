@@ -1,0 +1,101 @@
+Insert INTO employees(emp_no,birth_date,first_name,last_name,Gender,hire_date) VALUES(1,'1998-12-17','Musa','Ali','M','2015-10-20');
+Insert INTO employees(emp_no,birth_date,first_name,last_name,Gender,hire_date) VALUES(2,'1994-11-12','Murshad','Ali','M','2014-11-25');
+Insert INTO employees(emp_no,birth_date,first_name,last_name,Gender,hire_date) VALUES(3,'1999-12-27','saima','Batool','F','2018-11-20');
+Insert INTO employees(emp_no,birth_date,first_name,last_name,Gender,hire_date) VALUES(4,'1994-12-12','Sidra','Kosar','F','2013-9-3');
+SELECT * from employees;
+
+Insert INTO departments VALUES('1','Accounts');
+Insert INTO departments VALUES('2','Electrical');
+Insert INTO departments VALUES('3','Machenical');
+Insert INTO departments VALUES('4','Production');
+SELECT * from departments;
+
+Insert INTO dept_emp VALUES(SELECT t1.emp_no FROM employees t1 WHERE t1.emp_no=1 , SELECT t2.dept_no FROM departments t2 where t2.dept_no=1,'2015-12-12','2019-11-19');
+Insert INTO dept_emp VALUES(SELECT t1.emp_no FROM employees t1 WHERE t1.emp_no=2 , SELECT t2.dept_no FROM departments t2 where t2.dept_no=2,'2015-12-12','2019-11-19');
+
+INSERT INTO salaries(emp_no,salary,from_date,to_date) SELECT emp_no FROM employees WHERE emp_no=1, 2000 , SELECT from_date FROM employees,'2018-12-13';
+INSERT INTO salaries(emp_no,salary,from_date,to_date) SELECT emp_no FROM employees WHERE emp_no=2, 3000 , SELECT from_date FROM employees,'2015-12-12';
+
+UPDATE dept_emp SET dept_no = 4 WHERE dept_no = 1;
+UPDATE dept_emp SET dept_no = 3 WHERE dept_no = 2;
+UPDATE dept_emp SET dept_no = 2 WHERE dept_no = 5;
+
+UPDATE salaries SET salary=5000 WHERE emp_no=2;
+UPDATE salaries SET salary=10000 WHERE emp_no=1;
+UPDATE salaries SET salary=6000 WHERE emp_no=3;
+
+UPDATE departments SET dept_name = 'Marketing' WHERE dept_no = 2;
+UPDATE departments SET dept_name = 'Finance' WHERE dept_no = 2;
+UPDATE departments SET dept_name = 'R&D' WHERE dept_name = 'Machenical';
+
+UPDATE titles SET title='Manager' WHERE emp_no = 1;
+UPDATE titles SET title='Manager' WHERE title='Employee';
+UPDATE titles SET title='Employee' WHERE title='Sweaper';
+
+Update employees SET hire_date = '2013-11-5' WHERE emp_no =1;
+Update employees SET hire_date = '2012-10-15' WHERE hire_date='2012-4-25';
+Update employees SET hire_date = '2013-7-21' WHERE emp_no =2;
+
+DELETE FROM employees WHERE hire_date <= '2016-2-1';
+DELETE FROM employees WHERE hire_date < '2016-2-1';
+
+DELETE FROM departments;
+
+
+
+
+CREATE TABLE supliers( s_id int NOT NULL PRIMARY KEY, s_name VARCHAR(30), contact VARCHAR(12), city varchar(30));
+
+CREATE Table products( p_id int not null, p_name varchar(30), units INT not Null, unit_price int(11), type varchar(30), s_id int(10), PRIMARY KEY(p_id), FOREIGN KEY (s_id) REFERENCES supliers(s_id));
+
+CREATE TABLE orders( order_id int PRIMARY KEY, coustomer_name varchar(30), order_date date);
+
+CREATE TABLE order_detail( p_id INT , order_id INT, units_purchased INT(5) NOT NULL, PRIMARY KEY(p_id,order_id));
+
+INSERT INTO supliers Values(320,'Munir Brothers','0333-1234567','Karachi');
+INSERT INTO supliers Values(312,'Alliance Pharmaceuticals','0333-1232537','Pwr');
+INSERT INTO supliers Values(478,'Abbot Pharmaceuticals','0321-1234567','Lahore');
+INSERT INTO supliers Values(657,'Sanofi Aventis','0321-1234567','Islamabad');
+
+INSERT INTO products Values(1005,'Ponstan',100,15,'Tablets',SELECT s_id FROM supliers  WHERE s_id=312);
+INSERT INTO products Values(1421,'Brufen',25,35,'Syrup',SELECT s_id FROM supliers  WHERE s_id=657);
+
+
+INSERT INTO orders Values(22,'Waleed Ali','2014-11-25');
+INSERT INTO orders Values(23,'Azhar Akbar','2014-2-12');
+INSERT INTO orders Values(24,'Shahzeb Khan','2014-5-12');
+Select * from orders;
+
+Insert INTO order_detail(p_id,order_id,units_purchased) Values(SELECT p_id FROM products WHERE p_id=1005, SELECT order_id FROM orders WHERE order_id=22,5);
+Insert INTO order_detail(p_id,order_id,units_purchased) Values(SELECT p_id FROM products WHERE p_id=1005, SELECT order_id FROM orders WHERE order_id=22,1);
+Insert INTO order_detail(p_id,order_id,units_purchased) Values(SELECT p_id FROM products WHERE p_id=1216, SELECT order_id FROM orders WHERE order_id=22,4);
+
+
+Update supliers SET s_name='Muneer Brother' Where s_name='Munir Brothers';
+
+DELETE FROM products Where p_id=3215;
+//  Yes it deleted because it has the previlges of CASECADE 
+
+Update products SET unit_price=40 where type='Tablets';
+
+DELETE FROM orders WHERE order_id = 22;
+// Yes it deletes and also delete record from order_detail table because of CASECADE previlges
+
+DELETE FROM orders;
+SELECT * FROM orders;
+
+DELETE FROM order_detail;
+SELECT * FROM order_detail;
+
+DELETE FROM supliers;
+SELECT * FROM supliers;
+
+DELETE FROM products;
+SELECT * FROM products;
+
+DROP TABLE orders;
+DROP TABLE order_detail;
+DROP TABLE supliers;
+DROP TABLE products;
+
+SHOW TABLES;

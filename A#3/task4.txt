@@ -1,0 +1,444 @@
+Microsoft Windows [Version 10.0.17134.648]
+(c) 2018 Microsoft Corporation. All rights reserved.
+
+C:\Users\iqra fakhar>cd ..
+
+C:\Users>cd ..
+
+C:\>cd xampp
+
+C:\xampp>cd mysql
+
+C:\xampp\mysql>cd bin
+
+C:\xampp\mysql\bin>mysql -u root
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 10
+Server version: 10.1.30-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2017, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> create database pharma;
+ERROR 1007 (HY000): Can't create database 'pharma'; database exists
+MariaDB [(none)]> create database pharma1;
+Query OK, 1 row affected (0.00 sec)
+
+MariaDB [(none)]> use pharma1;
+Database changed
+MariaDB [pharma1]> CREATE TABLE suppliers(
+    ->  s_id varchar(20) not null,
+    -> s_name varchar(50) not null,
+    -> contact varchar(12) not null,
+    -> city varchar(30) not null,
+    -> primary key (s_id));
+Query OK, 0 rows affected (0.23 sec)
+
+MariaDB [pharma1]>  describe suppliers;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| s_id    | varchar(20) | NO   | PRI | NULL    |       |
+| s_name  | varchar(50) | NO   |     | NULL    |       |
+| contact | varchar(12) | NO   |     | NULL    |       |
+| city    | varchar(30) | NO   |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+4 rows in set (0.10 sec)
+
+MariaDB [pharma1]> create table orderss(
+    -> o_id int not null,
+    -> customer_name varchar(50) not null,
+    -> or_dates date not null,
+    -> primary key (o_id));
+Query OK, 0 rows affected (0.23 sec)
+
+MariaDB [pharma1]> describe orderss;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| o_id          | int(11)     | NO   | PRI | NULL    |       |
+| customer_name | varchar(50) | NO   |     | NULL    |       |
+| or_dates      | date        | NO   |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+3 rows in set (0.03 sec)
+
+MariaDB [pharma1]> create table product (
+    -> p_id varchar(10)  not null,
+    -> pr_name varchar(30) not null,
+    -> units int(10) not null,
+    -> unit_price int(10) not null,
+    -> type varchar(40) not null,
+    -> s_id varchar(20) not null,
+    -> key (s_id),
+    -> foreign key (s_id) references suppliers (s_id) on delete cascade,
+    -> primary key (p_id));
+Query OK, 0 rows affected (0.23 sec)
+
+MariaDB [pharma1]> describe product;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| p_id       | varchar(10) | NO   | PRI | NULL    |       |
+| pr_name    | varchar(30) | NO   |     | NULL    |       |
+| units      | int(10)     | NO   |     | NULL    |       |
+| unit_price | int(10)     | NO   |     | NULL    |       |
+| type       | varchar(40) | NO   |     | NULL    |       |
+| s_id       | varchar(20) | NO   | MUL | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+6 rows in set (0.01 sec)
+
+MariaDB [pharma1]> create table order_detail(
+    -> p_id varchar(10) not null,
+    -> o_id int(11) not null,
+    -> units_purchased int not null,
+    -> key (p_id),
+    -> key (o_id),
+    -> foreign key (p_id) references product (p_id) on delete cascade,
+    -> foreign key (o_id) references orderss (o_id) on delete cascade);
+Query OK, 0 rows affected (0.22 sec)
+
+MariaDB [pharma1]> describe order_detail;
++-----------------+-------------+------+-----+---------+-------+
+| Field           | Type        | Null | Key | Default | Extra |
++-----------------+-------------+------+-----+---------+-------+
+| p_id            | varchar(10) | NO   | MUL | NULL    |       |
+| o_id            | int(11)     | NO   | MUL | NULL    |       |
+| units_purchased | int(11)     | NO   |     | NULL    |       |
++-----------------+-------------+------+-----+---------+-------+
+3 rows in set (0.02 sec)
+
+MariaDB [pharma1]> insert into suppliers
+    -> values ('320','Munir Brothers','0321-1234567','karachi');
+Query OK, 1 row affected (0.04 sec)
+
+MariaDB [pharma1]> insert into suppliers
+    -> values ('312','Alliance Pharmaceuticals','0313-7654321','Peshawar');
+Query OK, 1 row affected (0.07 sec)
+
+MariaDB [pharma1]> insert into suppliers
+    -> values ('478','Abbot Pharmaceuticals','0313-9876543','Lahore');
+Query OK, 1 row affected (0.05 sec)
+
+MariaDB [pharma1]> insert into suppliers
+    -> values ('657','Sanofi Aventis','0333-5632476','Islamabad');
+Query OK, 1 row affected (0.08 sec)
+
+MariaDB [pharma1]> insert into suppliers
+    -> values ('987','Ferozsons Laboratories','0301-1934257','Peshawar');
+Query OK, 1 row affected (0.06 sec)
+
+MariaDB [pharma1]> select * from suppliers;
++------+--------------------------+--------------+-----------+
+| s_id | s_name                   | contact      | city      |
++------+--------------------------+--------------+-----------+
+| 312  | Alliance Pharmaceuticals | 0313-7654321 | Peshawar  |
+| 320  | Munir Brothers           | 0321-1234567 | karachi   |
+| 478  | Abbot Pharmaceuticals    | 0313-9876543 | Lahore    |
+| 657  | Sanofi Aventis           | 0333-5632476 | Islamabad |
+| 987  | Ferozsons Laboratories   | 0301-1934257 | Peshawar  |
++------+--------------------------+--------------+-----------+
+5 rows in set (0.00 sec)
+
+MariaDB [pharma1]> insert into orderss
+    -> values (22,'Waleed Ali','2014-11-25');
+Query OK, 1 row affected (0.05 sec)
+
+MariaDB [pharma1]> insert into orderss
+    -> values (23,'Azhar Akbar','2014-12-02');
+Query OK, 1 row affected (0.07 sec)
+
+MariaDB [pharma1]> insert into orderss
+    -> values (24,'shahzeb khan','2014-12-05');
+Query OK, 1 row affected (0.05 sec)
+
+MariaDB [pharma1]> insert into orderss
+    -> values (25,'javed iqbal','2014-01-15');
+Query OK, 1 row affected (0.07 sec)
+
+MariaDB [pharma1]> insert into orderss
+    -> values (26,'Tariq khan','2015-06-25');
+Query OK, 1 row affected (0.05 sec)
+
+MariaDB [pharma1]> delete from orderss where o_id = 25;
+Query OK, 1 row affected (0.07 sec)
+
+MariaDB [pharma1]> insert into orderss
+    -> values (25,'javed iqbal','2015-01-15');
+Query OK, 1 row affected (0.06 sec)
+
+MariaDB [pharma1]>  select * from orderss;
++------+---------------+------------+
+| o_id | customer_name | or_dates   |
++------+---------------+------------+
+|   22 | Waleed Ali    | 2014-11-25 |
+|   23 | Azhar Akbar   | 2014-12-02 |
+|   24 | shahzeb khan  | 2014-12-05 |
+|   25 | javed iqbal   | 2015-01-15 |
+|   26 | Tariq khan    | 2015-06-25 |
++------+---------------+------------+
+5 rows in set (0.00 sec)
+
+MariaDB [pharma1]> insert into product
+    -> values ('1005','Ponstan',100,15,'Tablets','312');
+Query OK, 1 row affected (0.03 sec)
+
+MariaDB [pharma1]> insert into product
+    -> values ('1421','Brufen',25,35,'syrup','657');
+Query OK, 1 row affected (0.07 sec)
+
+MariaDB [pharma1]> insert into product
+    -> values ('3215','Avil',122,26,'syrup','478');
+Query OK, 1 row affected (0.05 sec)
+
+MariaDB [pharma1]> insert into product
+    -> values ('1215','Flagyl',42,30,'Tablets','987');
+Query OK, 1 row affected (0.07 sec)
+
+MariaDB [pharma1]> insert into product
+    -> values ('7513','Avil',140,20,'Injection','478');
+Query OK, 1 row affected (0.05 sec)
+
+MariaDB [pharma1]> insert into product
+    -> values ('1216','Flagyl',10,35,'syrup','987');
+Query OK, 1 row affected (0.07 sec)
+
+MariaDB [pharma1]> insert into product
+    -> values ('1007','Disprin',98,15,'Tablets','320');
+Query OK, 1 row affected (0.06 sec)
+
+MariaDB [pharma1]> select * from product;
++------+---------+-------+------------+-----------+------+
+| p_id | pr_name | units | unit_price | type      | s_id |
++------+---------+-------+------------+-----------+------+
+| 1005 | Ponstan |   100 |         15 | Tablets   | 312  |
+| 1007 | Disprin |    98 |         15 | Tablets   | 320  |
+| 1215 | Flagyl  |    42 |         30 | Tablets   | 987  |
+| 1216 | Flagyl  |    10 |         35 | syrup     | 987  |
+| 1421 | Brufen  |    25 |         35 | syrup     | 657  |
+| 3215 | Avil    |   122 |         26 | syrup     | 478  |
+| 7513 | Avil    |   140 |         20 | Injection | 478  |
++------+---------+-------+------------+-----------+------+
+7 rows in set (0.00 sec)
+
+MariaDB [pharma1]> select * from suppliers;
++------+--------------------------+--------------+-----------+
+| s_id | s_name                   | contact      | city      |
++------+--------------------------+--------------+-----------+
+| 312  | Alliance Pharmaceuticals | 0313-7654321 | Peshawar  |
+| 320  | Munir Brothers           | 0321-1234567 | karachi   |
+| 478  | Abbot Pharmaceuticals    | 0313-9876543 | Lahore    |
+| 657  | Sanofi Aventis           | 0333-5632476 | Islamabad |
+| 987  | Ferozsons Laboratories   | 0301-1934257 | Peshawar  |
++------+--------------------------+--------------+-----------+
+5 rows in set (0.00 sec)
+
+MariaDB [pharma1]> insert into order_detail
+    -> values ('1007',22,5);
+Query OK, 1 row affected (0.06 sec)
+
+MariaDB [pharma1]> insert into order_detail
+    -> values ('1216',22,1);
+Query OK, 1 row affected (0.05 sec)
+
+MariaDB [pharma1]> insert into order_detail
+    -> values ('1005',22,4);
+Query OK, 1 row affected (0.06 sec)
+
+MariaDB [pharma1]> insert into order_detail
+    -> values ('1421',23,1);
+Query OK, 1 row affected (0.03 sec)
+
+MariaDB [pharma1]> insert into order_detail
+    -> values ('1005',23,1);
+Query OK, 1 row affected (0.04 sec)
+
+MariaDB [pharma1]> insert into order_detail
+    -> values ('3215',23,2);
+Query OK, 1 row affected (0.05 sec)
+
+MariaDB [pharma1]> insert into order_detail
+    -> values ('7513',23,3);
+Query OK, 1 row affected (0.05 sec)
+
+MariaDB [pharma1]> insert into order_detail
+    -> values ('1421',24,2);
+Query OK, 1 row affected (0.05 sec)
+
+MariaDB [pharma1]> insert into order_detail
+    -> values ('1215',24,1);
+Query OK, 1 row affected (0.06 sec)
+
+MariaDB [pharma1]> insert into order_detail
+    -> values ('1421',26,3);
+Query OK, 1 row affected (0.04 sec)
+
+MariaDB [pharma1]> insert into order_detail
+    -> values ('1215',26,1);
+Query OK, 1 row affected (0.07 sec)
+
+MariaDB [pharma1]>  insert into order_detail
+    -> values ('1005',25,5);
+Query OK, 1 row affected (0.05 sec)
+
+MariaDB [pharma1]> select * from order_detail;
++------+------+-----------------+
+| p_id | o_id | units_purchased |
++------+------+-----------------+
+| 1007 |   22 |               5 |
+| 1216 |   22 |               1 |
+| 1005 |   22 |               4 |
+| 1421 |   23 |               1 |
+| 1005 |   23 |               1 |
+| 3215 |   23 |               2 |
+| 7513 |   23 |               3 |
+| 1421 |   24 |               2 |
+| 1215 |   24 |               1 |
+| 1421 |   26 |               3 |
+| 1215 |   26 |               1 |
+| 1005 |   25 |               5 |
++------+------+-----------------+
+12 rows in set (0.00 sec)
+
+
+MariaDB [pharma1]> select od.p_id, p.pr_name, o.o_id,customer_name from product p, orderss o, order_detail od where o.customer_name="Javed Iqbal";
++------+---------+------+---------------+
+| p_id | pr_name | o_id | customer_name |
++------+---------+------+---------------+
+| 1007 | Ponstan |   25 | javed iqbal   |
+| 1007 | Disprin |   25 | javed iqbal   |
+| 1007 | Flagyl  |   25 | javed iqbal   |
+| 1007 | Flagyl  |   25 | javed iqbal   |
+| 1007 | Brufen  |   25 | javed iqbal   |
+| 1007 | Avil    |   25 | javed iqbal   |
+| 1007 | Avil    |   25 | javed iqbal   |
+| 1216 | Ponstan |   25 | javed iqbal   |
+| 1216 | Disprin |   25 | javed iqbal   |
+| 1216 | Flagyl  |   25 | javed iqbal   |
+| 1216 | Flagyl  |   25 | javed iqbal   |
+| 1216 | Brufen  |   25 | javed iqbal   |
+| 1216 | Avil    |   25 | javed iqbal   |
+| 1216 | Avil    |   25 | javed iqbal   |
+| 1005 | Ponstan |   25 | javed iqbal   |
+| 1005 | Disprin |   25 | javed iqbal   |
+| 1005 | Flagyl  |   25 | javed iqbal   |
+| 1005 | Flagyl  |   25 | javed iqbal   |
+| 1005 | Brufen  |   25 | javed iqbal   |
+| 1005 | Avil    |   25 | javed iqbal   |
+| 1005 | Avil    |   25 | javed iqbal   |
+| 1421 | Ponstan |   25 | javed iqbal   |
+| 1421 | Disprin |   25 | javed iqbal   |
+| 1421 | Flagyl  |   25 | javed iqbal   |
+| 1421 | Flagyl  |   25 | javed iqbal   |
+| 1421 | Brufen  |   25 | javed iqbal   |
+| 1421 | Avil    |   25 | javed iqbal   |
+| 1421 | Avil    |   25 | javed iqbal   |
+| 1005 | Ponstan |   25 | javed iqbal   |
+| 1005 | Disprin |   25 | javed iqbal   |
+| 1005 | Flagyl  |   25 | javed iqbal   |
+| 1005 | Flagyl  |   25 | javed iqbal   |
+| 1005 | Brufen  |   25 | javed iqbal   |
+| 1005 | Avil    |   25 | javed iqbal   |
+| 1005 | Avil    |   25 | javed iqbal   |
+| 3215 | Ponstan |   25 | javed iqbal   |
+| 3215 | Disprin |   25 | javed iqbal   |
+| 3215 | Flagyl  |   25 | javed iqbal   |
+| 3215 | Flagyl  |   25 | javed iqbal   |
+| 3215 | Brufen  |   25 | javed iqbal   |
+| 3215 | Avil    |   25 | javed iqbal   |
+| 3215 | Avil    |   25 | javed iqbal   |
+| 7513 | Ponstan |   25 | javed iqbal   |
+| 7513 | Disprin |   25 | javed iqbal   |
+| 7513 | Flagyl  |   25 | javed iqbal   |
+| 7513 | Flagyl  |   25 | javed iqbal   |
+| 7513 | Brufen  |   25 | javed iqbal   |
+| 7513 | Avil    |   25 | javed iqbal   |
+| 7513 | Avil    |   25 | javed iqbal   |
+| 1421 | Ponstan |   25 | javed iqbal   |
+| 1421 | Disprin |   25 | javed iqbal   |
+| 1421 | Flagyl  |   25 | javed iqbal   |
+| 1421 | Flagyl  |   25 | javed iqbal   |
+| 1421 | Brufen  |   25 | javed iqbal   |
+| 1421 | Avil    |   25 | javed iqbal   |
+| 1421 | Avil    |   25 | javed iqbal   |
+| 1215 | Ponstan |   25 | javed iqbal   |
+| 1215 | Disprin |   25 | javed iqbal   |
+| 1215 | Flagyl  |   25 | javed iqbal   |
+| 1215 | Flagyl  |   25 | javed iqbal   |
+| 1215 | Brufen  |   25 | javed iqbal   |
+| 1215 | Avil    |   25 | javed iqbal   |
+| 1215 | Avil    |   25 | javed iqbal   |
+| 1421 | Ponstan |   25 | javed iqbal   |
+| 1421 | Disprin |   25 | javed iqbal   |
+| 1421 | Flagyl  |   25 | javed iqbal   |
+| 1421 | Flagyl  |   25 | javed iqbal   |
+| 1421 | Brufen  |   25 | javed iqbal   |
+| 1421 | Avil    |   25 | javed iqbal   |
+| 1421 | Avil    |   25 | javed iqbal   |
+| 1215 | Ponstan |   25 | javed iqbal   |
+| 1215 | Disprin |   25 | javed iqbal   |
+| 1215 | Flagyl  |   25 | javed iqbal   |
+| 1215 | Flagyl  |   25 | javed iqbal   |
+| 1215 | Brufen  |   25 | javed iqbal   |
+| 1215 | Avil    |   25 | javed iqbal   |
+| 1215 | Avil    |   25 | javed iqbal   |
+| 1005 | Ponstan |   25 | javed iqbal   |
+| 1005 | Disprin |   25 | javed iqbal   |
+| 1005 | Flagyl  |   25 | javed iqbal   |
+| 1005 | Flagyl  |   25 | javed iqbal   |
+| 1005 | Brufen  |   25 | javed iqbal   |
+| 1005 | Avil    |   25 | javed iqbal   |
+| 1005 | Avil    |   25 | javed iqbal   |
++------+---------+------+---------------+
+84 rows in set (0.00 sec)
+
+
+MariaDB [pharma1]> select p.s_id,s.s_name, pr_name from suppliers s, product p where p.s_id=320 and s.s_name="Munir Brothers";
++------+----------------+---------+
+| s_id | s_name         | pr_name |
++------+----------------+---------+
+| 320  | Munir Brothers | Disprin |
++------+----------------+---------+
+1 row in set (0.00 sec)
+
+MariaDB [pharma1]> delete from product where pr_name='Avil';
+Query OK, 2 rows affected (0.08 sec)
+
+MariaDB [pharma1]> select * from product;
++------+---------+-------+------------+---------+------+
+| p_id | pr_name | units | unit_price | type    | s_id |
++------+---------+-------+------------+---------+------+
+| 1005 | Ponstan |   100 |         15 | Tablets | 312  |
+| 1007 | Disprin |    98 |         15 | Tablets | 320  |
+| 1215 | Flagyl  |    42 |         30 | Tablets | 987  |
+| 1216 | Flagyl  |    10 |         35 | syrup   | 987  |
+| 1421 | Brufen  |    25 |         35 | syrup   | 657  |
++------+---------+-------+------------+---------+------+
+5 rows in set (0.00 sec)
+
+MariaDB [pharma1]> select p.pr_name, s.s_name from product p, suppliers s where s.city="Peshawar";
++---------+--------------------------+
+| pr_name | s_name                   |
++---------+--------------------------+
+| Ponstan | Alliance Pharmaceuticals |
+| Disprin | Alliance Pharmaceuticals |
+| Flagyl  | Alliance Pharmaceuticals |
+| Flagyl  | Alliance Pharmaceuticals |
+| Brufen  | Alliance Pharmaceuticals |
+| Ponstan | Ferozsons Laboratories   |
+| Disprin | Ferozsons Laboratories   |
+| Flagyl  | Ferozsons Laboratories   |
+| Flagyl  | Ferozsons Laboratories   |
+| Brufen  | Ferozsons Laboratories   |
++---------+--------------------------+
+10 rows in set (0.00 sec)
+
+MariaDB [pharma1]> select p.pr_name, s.s_name,count(p.p_id) from product p,suppliers s where s.s_name="Sanofi Aventis" AND p.s_id=s.s_id;
++---------+----------------+---------------+
+| pr_name | s_name         | count(p.p_id) |
++---------+----------------+---------------+
+| Brufen  | Sanofi Aventis |             1 |
++---------+----------------+---------------+
+1 row in set (0.00 sec)
+
+MariaDB [pharma1]>

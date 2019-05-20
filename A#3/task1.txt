@@ -1,0 +1,288 @@
+Microsoft Windows [Version 10.0.17134.648]
+(c) 2018 Microsoft Corporation. All rights reserved.
+
+
+
+C:\Users>cd ..
+
+C:\>cd xampp
+
+C:\xampp>cd mysql
+
+C:\xampp\mysql>cd bin
+
+C:\xampp\mysql\bin>mysql -u root
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 4
+Server version: 10.1.30-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2017, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> create database question1;
+Query OK, 1 row affected (0.00 sec)
+
+MariaDB [(none)]> use question1;
+Database changed
+MariaDB [question1]> create table customer(
+    -> cust_id int(10)primary key,
+    -> firstname varchar(20) not null,
+    -> lastname varchar(20) not null,
+    -> city varchar(20) not null,
+    -> country varchar(20) not null,
+    -> phone varchar(25) not null);
+Query OK, 0 rows affected (0.23 sec)
+
+MariaDB [question1]> create table orders(
+    -> or_id int(10) primary key,
+    -> orderdate date not null,
+    -> ordernumber int(10) not null,
+    -> cust_id int(10),
+    -> totalamount int(30) not null,
+    -> constraint fk_order_customer foreign key(cust_id)
+    -> references customer(cust_id));
+Query OK, 0 rows affected (0.26 sec)
+
+MariaDB [question1]> insert into customer
+    -> values (1,'ali','hassan','peshawar','pakistan','0315-0987436');
+Query OK, 1 row affected (0.05 sec)
+
+MariaDB [question1]> insert into customer
+    -> values(2,'nayab','fakhar','duka','london','0315-3452167');
+Query OK, 1 row affected (0.07 sec)
+
+MariaDB [question1]> insert into customer
+    -> values (3,'mohsin','iqbal','rahim yar khan','pakistan','0315-0213456');
+Query OK, 1 row affected (0.06 sec)
+
+MariaDB [question1]> insert into customer
+    -> values(4,'fatima','fakhar','rahim yar khan','pakistan','0315-3453457');
+Query OK, 1 row affected (0.06 sec)
+
+MariaDB [question1]> insert into customer
+    -> values(5,'damon','salvatore','mystic falls','USA','0315-3453123');
+Query OK, 1 row affected (0.06 sec)
+
+MariaDB [question1]> insert into customer
+    -> values(6,'stafen','salvatore','mystic falls','USA','0315-3345213');
+Query OK, 1 row affected (0.08 sec)
+
+MariaDB [question1]> insert into customer
+    -> values(7,'elena','gilbert','mystic falls','USA','0315-3123123');
+Query OK, 1 row affected (0.05 sec)
+
+MariaDB [question1]> insert into customer
+    -> values(8,'rabail','munawar','shangai','china','0315-3335213');
+Query OK, 1 row affected (0.07 sec)
+
+MariaDB [question1]> insert into customer
+    -> values(9,'saleem','akhtar','shangai','china','0315-3333123');
+Query OK, 1 row affected (0.06 sec)
+
+MariaDB [question1]> insert into customer
+    -> values(10,'bilal','nadeem','gilgit baltistan','pakistan','0315-3333123');
+Query OK, 1 row affected (0.04 sec)
+
+MariaDB [question1]> insert into customer
+    -> values(11,'mehboob','ali','lahore','pakistan','0315-3312433');
+Query OK, 1 row affected (0.07 sec)
+
+MariaDB [question1]> insert into customer
+    -> values(12,'mehmood','munir','kor','korea','0312-3412433');
+Query OK, 1 row affected (0.06 sec)
+
+MariaDB [question1]> insert into customer
+    -> values(13,'muhammad','ahsan','gujjrat','pakistan','0312-3411433');
+Query OK, 1 row affected (0.04 sec)
+
+MariaDB [question1]> insert into customer
+    -> values(14,'bashir','ahmad','lahore','pakistan','0312-3444433');
+Query OK, 1 row affected (0.06 sec)
+
+MariaDB [question1]> insert into customer
+    -> values(15,'iqra','fakhar','rahim yar khan','pakistan','0312-3555533');
+Query OK, 1 row affected (0.06 sec)
+
+MariaDB [question1]> insert into customer
+    -> values(16,'sabahat','ejaz','peshawar','pakistan','0312-6666533');
+Query OK, 1 row affected (0.06 sec)
+
+MariaDB [question1]> insert into customer
+    -> values(17,'zainab','ali','mumbai','india','0312-7777533');
+Query OK, 1 row affected (0.08 sec)
+
+MariaDB [question1]> insert into customer
+    -> values(18,'hamza','qureshi','multan','pakistan','0312-7111111');
+Query OK, 1 row affected (0.06 sec)
+
+MariaDB [question1]> insert into customer
+    -> values(19,'fakhar','saleem','peshawar','pakistan','0312-1111111');
+Query OK, 1 row affected (0.03 sec)
+
+MariaDB [question1]> insert into customer
+    -> values(20,'ejaz','saleem','quetta','pakistan','0312-2222221');
+Query OK, 1 row affected (0.05 sec)
+
+MariaDB [question1]>  select * from customer;
++---------+-----------+-----------+------------------+----------+--------------+
+| cust_id | firstname | lastname  | city             | country  | phone        |
++---------+-----------+-----------+------------------+----------+--------------+
+|       1 | ali       | hassan    | peshawar         | pakistan | 0315-0987436 |
+|       2 | nayab     | fakhar    | duka             | london   | 0315-3452167 |
+|       3 | mohsin    | iqbal     | rahim yar khan   | pakistan | 0315-0213456 |
+|       4 | fatima    | fakhar    | rahim yar khan   | pakistan | 0315-3453457 |
+|       5 | damon     | salvatore | mystic falls     | USA      | 0315-3453123 |
+|       6 | stafen    | salvatore | mystic falls     | USA      | 0315-3345213 |
+|       7 | elena     | gilbert   | mystic falls     | USA      | 0315-3123123 |
+|       8 | rabail    | munawar   | shangai          | china    | 0315-3335213 |
+|       9 | saleem    | akhtar    | shangai          | china    | 0315-3333123 |
+|      10 | bilal     | nadeem    | gilgit baltistan | pakistan | 0315-3333123 |
+|      11 | mehboob   | ali       | lahore           | pakistan | 0315-3312433 |
+|      12 | mehmood   | munir     | kor              | korea    | 0312-3412433 |
+|      13 | muhammad  | ahsan     | gujjrat          | pakistan | 0312-3411433 |
+|      14 | bashir    | ahmad     | lahore           | pakistan | 0312-3444433 |
+|      15 | iqra      | fakhar    | rahim yar khan   | pakistan | 0312-3555533 |
+|      16 | sabahat   | ejaz      | peshawar         | pakistan | 0312-6666533 |
+|      17 | zainab    | ali       | mumbai           | india    | 0312-7777533 |
+|      18 | hamza     | qureshi   | multan           | pakistan | 0312-7111111 |
+|      19 | fakhar    | saleem    | peshawar         | pakistan | 0312-1111111 |
+|      20 | ejaz      | saleem    | quetta           | pakistan | 0312-2222221 |
++---------+-----------+-----------+------------------+----------+--------------+
+20 rows in set (0.00 sec)
+
+MariaDB [question1]> insert into orders
+    -> values (11,str_to_date('01,jan,11','%d,%b,%y'),1,1,1001);
+Query OK, 1 row affected (0.05 sec)
+
+MariaDB [question1]> insert into orders
+    -> values (22,str_to_date('02,jan,11','%d,%b,%y'),2,11,1002);
+Query OK, 1 row affected (0.05 sec)
+
+MariaDB [question1]> insert into orders
+    -> values (33,str_to_date('03,jan,11','%d,%b,%y'),3,3,1003);
+Query OK, 1 row affected (0.06 sec)
+
+MariaDB [question1]> insert into orders
+    -> values (44,str_to_date('04,jan,11','%d,%b,%y'),4,6,2001);
+Query OK, 1 row affected (0.04 sec)
+
+MariaDB [question1]> insert into orders
+    -> values (55,str_to_date('05,jan,11','%d,%b,%y'),5,7,2045);
+Query OK, 1 row affected (0.06 sec)
+
+MariaDB [question1]> insert into orders
+    -> values (66,str_to_date('06,jan,11','%d,%b,%y'),6,9,2004);
+Query OK, 1 row affected (0.09 sec)
+
+MariaDB [question1]> insert into orders
+    -> values (77,str_to_date('07,jan,11','%d,%b,%y'),7,20,3220);
+Query OK, 1 row affected (0.06 sec)
+
+MariaDB [question1]> select * from orders;
++-------+------------+-------------+---------+-------------+
+| or_id | orderdate  | ordernumber | cust_id | totalamount |
++-------+------------+-------------+---------+-------------+
+|    11 | 2011-01-01 |           1 |       1 |        1001 |
+|    22 | 2011-01-02 |           2 |      11 |        1002 |
+|    33 | 2011-01-03 |           3 |       3 |        1003 |
+|    44 | 2011-01-04 |           4 |       6 |        2001 |
+|    55 | 2011-01-05 |           5 |       7 |        2045 |
+|    66 | 2011-01-06 |           6 |       9 |        2004 |
+|    77 | 2011-01-07 |           7 |      20 |        3220 |
++-------+------------+-------------+---------+-------------+
+7 rows in set (0.00 sec)
+
+MariaDB [question1]> select country, count(*)
+    ->      from customer
+    ->     group by country
+    ->     having count(*)>10;
++----------+----------+
+| country  | count(*) |
++----------+----------+
+| pakistan |       12 |
++----------+----------+
+1 row in set (0.00 sec)
+
+MariaDB [question1]> select country,count(*)  from customer where country<>'USA' group by country having count(*)>=9 order by count(*) desc;
++----------+----------+
+| country  | count(*) |
++----------+----------+
+| pakistan |       12 |
++----------+----------+
+1 row in set (0.00 sec)
+
+MariaDB [question1]> select c.cust_id from customer c,orders o where c.cust_id = o.cust_id group by c.cust_id having sum(totalamount) >= all(select sum(totalamount) from orders o group by o.cust_id);
++---------+
+| cust_id |
++---------+
+|      20 |
++---------+
+1 row in set (0.05 sec)
+
+MariaDB [question1]> select country,city,count(cust_id) from customer group by country,city;
++----------+------------------+----------------+
+| country  | city             | count(cust_id) |
++----------+------------------+----------------+
+| china    | shangai          |              2 |
+| india    | mumbai           |              1 |
+| korea    | kor              |              1 |
+| london   | duka             |              1 |
+| pakistan | gilgit baltistan |              1 |
+| pakistan | gujjrat          |              1 |
+| pakistan | lahore           |              2 |
+| pakistan | multan           |              1 |
+| pakistan | peshawar         |              3 |
+| pakistan | quetta           |              1 |
+| pakistan | rahim yar khan   |              3 |
+| USA      | mystic falls     |              3 |
++----------+------------------+----------------+
+12 rows in set (0.00 sec)
+
+
+MariaDB [question1]> select max(ordernumber) as total_order
+    -> from orders;
++-------------+
+| total_order |
++-------------+
+|           7 |
++-------------+
+1 row in set (0.05 sec)
+
+MariaDB [question1]> select count(*) as total_order,cust_id from orders group by cust_id;
++-------------+---------+
+| total_order | cust_id |
++-------------+---------+
+|           1 |       1 |
+|           1 |       3 |
+|           1 |       6 |
+|           1 |       7 |
+|           1 |       9 |
+|           1 |      11 |
+|           1 |      20 |
++-------------+---------+
+7 rows in set (0.00 sec)
+
+
+MariaDB [question1]> select c.cust_id, avg(totalamount)
+    -> from orders o,customer c
+    -> group by c.cust_id
+    -> having avg(totalamount) between 1000 and 1200;
+Empty set (0.00 sec)
+
+
+MariaDB [question1]> select c.cust_id from customer c,orders o where c.cust_id = o.cust_id group by c.cust_id having sum(totalamount) <= all(select sum(totalamount) from orders o group by o.cust_id);
++---------+
+| cust_id |
++---------+
+|       1 |
++---------+
+1 row in set (0.00 sec)
+
+MariaDB [question1]> select orderdate from orders group by orderdate having sum(totalamount) >= all(select sum(totalamount) from orders group by orderdate);
++------------+
+| orderdate  |
++------------+
+| 2011-01-07 |
++------------+
+1 row in set (0.00 sec)

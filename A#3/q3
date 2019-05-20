@@ -1,0 +1,3132 @@
+mysql> use northwind;
+Database changed
+mysql> show tables;
++--------------------------------+
+| Tables_in_northwind            |
++--------------------------------+
+| Alphabetical list of products  |
+| Categories                     |
+| Category Sales for 1997        |
+| Current Product List           |
+| Customer and Suppliers by City |
+| CustomerCustomerDemo           |
+| CustomerDemographics           |
+| Customers                      |
+| EmployeeTerritories            |
+| Employees                      |
+| Invoices                       |
+| Order Details                  |
+| Order Details Extended         |
+| Order Subtotals                |
+| Orders                         |
+| Orders Qry                     |
+| Product Sales for 1997         |
+| Products                       |
+| Products Above Average Price   |
+| Products by Category           |
+| Quarterly Orders               |
+| Region                         |
+| Sales Totals by Amount         |
+| Sales by Category              |
+| Shippers                       |
+| Summary of Sales by Quarter    |
+| Summary of Sales by Year       |
+| Suppliers                      |
+| Territories                    |
++--------------------------------+
+29 rows in set (0.00 sec)
+
+mysql> 
+
+#
+#
+QUestion
+#
+#
+mysql> select productname, count(orderid) from Products inner join `Order Details` on Products.productid=`Order Details`.productid group by productname;
++----------------------------------+----------------+
+| productname                      | count(orderid) |
++----------------------------------+----------------+
+| Alice Mutton                     |             37 |
+| Aniseed Syrup                    |             12 |
+| Boston Crab Meat                 |             41 |
+| Camembert Pierrot                |             51 |
+| Carnarvon Tigers                 |             27 |
+| Chai                             |             38 |
+| Chang                            |             44 |
+| Chartreuse verte                 |             30 |
+| Chef Anton's Cajun Seasoning     |             20 |
+| Chef Anton's Gumbo Mix           |             10 |
+| Chocolade                        |              6 |
+| Cte de Blaye                     |             24 |
+| Escargots de Bourgogne           |             18 |
+| Filo Mix                         |             29 |
+| Flotemysost                      |             42 |
+| Geitost                          |             32 |
+| Genen Shouyu                     |              6 |
+| Gnocchi di nonna Alice           |             50 |
+| Gorgonzola Telino                |             51 |
+| Grandma's Boysenberry Spread     |             12 |
+| Gravad lax                       |              6 |
+| Guaran Fantstica                 |             51 |
+| Gudbrandsdalsost                 |             31 |
+| Gula Malacca                     |             24 |
+| Gumbr Gummibrchen                |             32 |
+| Gustaf's Knckebrd                |             14 |
+| Ikura                            |             33 |
+| Inlagd Sill                      |             31 |
+| Ipoh Coffee                      |             28 |
+| Jack's New England Clam Chowder  |             47 |
+| Konbu                            |             40 |
+| Lakkalikri                       |             39 |
+| Laughing Lumberjack Lager        |             10 |
+| Longlife Tofu                    |             13 |
+| Louisiana Fiery Hot Pepper Sauce |             32 |
+| Louisiana Hot Spiced Okra        |              8 |
+| Manjimup Dried Apples            |             39 |
+| Mascarpone Fabioli               |             15 |
+| Maxilaku                         |             21 |
+| Mishi Kobe Niku                  |              5 |
+| Mozzarella di Giovanni           |             38 |
+| Nord-Ost Matjeshering            |             32 |
+| Northwoods Cranberry Sauce       |             13 |
+| NuNuCa Nu-Nougat-Creme           |             18 |
+| Original Frankfurter grne Soe    |             38 |
+| Outback Lager                    |             39 |
+| Pavlova                          |             43 |
+| Perth Pasties                    |             30 |
+| Pt chinois                       |             33 |
+| Queso Cabrales                   |             38 |
+| Queso Manchego La Pastora        |             14 |
+| Raclette Courdavault             |             54 |
+| Ravioli Angelo                   |             23 |
+| Rd Kaviar                        |             14 |
+| Rhnbru Klosterbier               |             46 |
+| Rogede sild                      |             14 |
+| Rssle Sauerkraut                 |             33 |
+| Sasquatch Ale                    |             19 |
+| Schoggi Schokolade               |              9 |
+| Scottish Longbreads              |             34 |
+| Singaporean Hokkien Fried Mee    |             30 |
+| Sir Rodney's Marmalade           |             16 |
+| Sir Rodney's Scones              |             39 |
+| Sirop d'rable                    |             24 |
+| Spegesild                        |             27 |
+| Steeleye Stout                   |             36 |
+| Tarte au sucre                   |             48 |
+| Teatime Chocolate Biscuits       |             37 |
+| Thringer Rostbratwurst           |             32 |
+| Tofu                             |             22 |
+| Tourtire                         |             36 |
+| Tunnbrd                          |             20 |
+| Uncle Bob's Organic Dried Pears  |             29 |
+| Valkoinen suklaa                 |             10 |
+| Vegie-spread                     |             17 |
+| Wimmers gute Semmelkndel         |             30 |
+| Zaanse koeken                    |             21 |
++----------------------------------+----------------+
+77 rows in set (0.06 sec)
+
+mysql> 
+
+
+
+#
+#
+QUestion
+#
+#
+mysql> select distinct firstname,lastname,city,shipcity from Orders inner join Employees  ON city=shipcity;
++-----------+-----------+----------+----------+
+| firstname | lastname  | city     | shipcity |
++-----------+-----------+----------+----------+
+| Nancy     | Davolio   | Seattle  | Seattle  |
+| Laura     | Callahan  | Seattle  | Seattle  |
+| Steven    | Buchanan  | London   | London   |
+| Michael   | Suyama    | London   | London   |
+| Robert    | King      | London   | London   |
+| Anne      | Dodsworth | London   | London   |
+| Janet     | Leverling | Kirkland | Kirkland |
++-----------+-----------+----------+----------+
+7 rows in set (0.03 sec)
+
+mysql> 
+
+
+#
+#
+QUestion
+#
+#
+
+
+mysql> select distinct firstname,lastname,city,shipcity from Orders inner join Employees on city!=shipcity;
++-----------+-----------+----------+-----------------+
+| firstname | lastname  | city     | shipcity        |
++-----------+-----------+----------+-----------------+
+| Nancy     | Davolio   | Seattle  | Reims           |
+| Andrew    | Fuller    | Tacoma   | Reims           |
+| Janet     | Leverling | Kirkland | Reims           |
+| Margaret  | Peacock   | Redmond  | Reims           |
+| Steven    | Buchanan  | London   | Reims           |
+| Michael   | Suyama    | London   | Reims           |
+| Robert    | King      | London   | Reims           |
+| Laura     | Callahan  | Seattle  | Reims           |
+| Anne      | Dodsworth | London   | Reims           |
+| Nancy     | Davolio   | Seattle  | Mnster          |
+| Andrew    | Fuller    | Tacoma   | Mnster          |
+| Janet     | Leverling | Kirkland | Mnster          |
+| Margaret  | Peacock   | Redmond  | Mnster          |
+| Steven    | Buchanan  | London   | Mnster          |
+| Michael   | Suyama    | London   | Mnster          |
+| Robert    | King      | London   | Mnster          |
+| Laura     | Callahan  | Seattle  | Mnster          |
+| Anne      | Dodsworth | London   | Mnster          |
+| Nancy     | Davolio   | Seattle  | Rio de Janeiro  |
+| Andrew    | Fuller    | Tacoma   | Rio de Janeiro  |
+| Janet     | Leverling | Kirkland | Rio de Janeiro  |
+| Margaret  | Peacock   | Redmond  | Rio de Janeiro  |
+| Steven    | Buchanan  | London   | Rio de Janeiro  |
+| Michael   | Suyama    | London   | Rio de Janeiro  |
+| Robert    | King      | London   | Rio de Janeiro  |
+| Laura     | Callahan  | Seattle  | Rio de Janeiro  |
+| Anne      | Dodsworth | London   | Rio de Janeiro  |
+| Nancy     | Davolio   | Seattle  | Lyon            |
+| Andrew    | Fuller    | Tacoma   | Lyon            |
+| Janet     | Leverling | Kirkland | Lyon            |
+| Margaret  | Peacock   | Redmond  | Lyon            |
+| Steven    | Buchanan  | London   | Lyon            |
+| Michael   | Suyama    | London   | Lyon            |
+| Robert    | King      | London   | Lyon            |
+| Laura     | Callahan  | Seattle  | Lyon            |
+| Anne      | Dodsworth | London   | Lyon            |
+| Nancy     | Davolio   | Seattle  | Charleroi       |
+| Andrew    | Fuller    | Tacoma   | Charleroi       |
+| Janet     | Leverling | Kirkland | Charleroi       |
+| Margaret  | Peacock   | Redmond  | Charleroi       |
+| Steven    | Buchanan  | London   | Charleroi       |
+| Michael   | Suyama    | London   | Charleroi       |
+| Robert    | King      | London   | Charleroi       |
+| Laura     | Callahan  | Seattle  | Charleroi       |
+| Anne      | Dodsworth | London   | Charleroi       |
+| Nancy     | Davolio   | Seattle  | Bern            |
+| Andrew    | Fuller    | Tacoma   | Bern            |
+| Janet     | Leverling | Kirkland | Bern            |
+| Margaret  | Peacock   | Redmond  | Bern            |
+| Steven    | Buchanan  | London   | Bern            |
+| Michael   | Suyama    | London   | Bern            |
+| Robert    | King      | London   | Bern            |
+| Laura     | Callahan  | Seattle  | Bern            |
+| Anne      | Dodsworth | London   | Bern            |
+| Nancy     | Davolio   | Seattle  | Genve           |
+| Andrew    | Fuller    | Tacoma   | Genve           |
+| Janet     | Leverling | Kirkland | Genve           |
+| Margaret  | Peacock   | Redmond  | Genve           |
+| Steven    | Buchanan  | London   | Genve           |
+| Michael   | Suyama    | London   | Genve           |
+| Robert    | King      | London   | Genve           |
+| Laura     | Callahan  | Seattle  | Genve           |
+| Anne      | Dodsworth | London   | Genve           |
+| Nancy     | Davolio   | Seattle  | Resende         |
+| Andrew    | Fuller    | Tacoma   | Resende         |
+| Janet     | Leverling | Kirkland | Resende         |
+| Margaret  | Peacock   | Redmond  | Resende         |
+| Steven    | Buchanan  | London   | Resende         |
+| Michael   | Suyama    | London   | Resende         |
+| Robert    | King      | London   | Resende         |
+| Laura     | Callahan  | Seattle  | Resende         |
+| Anne      | Dodsworth | London   | Resende         |
+| Nancy     | Davolio   | Seattle  | San Cristbal    |
+| Andrew    | Fuller    | Tacoma   | San Cristbal    |
+| Janet     | Leverling | Kirkland | San Cristbal    |
+| Margaret  | Peacock   | Redmond  | San Cristbal    |
+| Steven    | Buchanan  | London   | San Cristbal    |
+| Michael   | Suyama    | London   | San Cristbal    |
+| Robert    | King      | London   | San Cristbal    |
+| Laura     | Callahan  | Seattle  | San Cristbal    |
+| Anne      | Dodsworth | London   | San Cristbal    |
+| Nancy     | Davolio   | Seattle  | Graz            |
+| Andrew    | Fuller    | Tacoma   | Graz            |
+| Janet     | Leverling | Kirkland | Graz            |
+| Margaret  | Peacock   | Redmond  | Graz            |
+| Steven    | Buchanan  | London   | Graz            |
+| Michael   | Suyama    | London   | Graz            |
+| Robert    | King      | London   | Graz            |
+| Laura     | Callahan  | Seattle  | Graz            |
+| Anne      | Dodsworth | London   | Graz            |
+| Nancy     | Davolio   | Seattle  | Mxico D.F.      |
+| Andrew    | Fuller    | Tacoma   | Mxico D.F.      |
+| Janet     | Leverling | Kirkland | Mxico D.F.      |
+| Margaret  | Peacock   | Redmond  | Mxico D.F.      |
+| Steven    | Buchanan  | London   | Mxico D.F.      |
+| Michael   | Suyama    | London   | Mxico D.F.      |
+| Robert    | King      | London   | Mxico D.F.      |
+| Laura     | Callahan  | Seattle  | Mxico D.F.      |
+| Anne      | Dodsworth | London   | Mxico D.F.      |
+| Nancy     | Davolio   | Seattle  | Kln             |
+| Andrew    | Fuller    | Tacoma   | Kln             |
+| Janet     | Leverling | Kirkland | Kln             |
+| Margaret  | Peacock   | Redmond  | Kln             |
+| Steven    | Buchanan  | London   | Kln             |
+| Michael   | Suyama    | London   | Kln             |
+| Robert    | King      | London   | Kln             |
+| Laura     | Callahan  | Seattle  | Kln             |
+| Anne      | Dodsworth | London   | Kln             |
+| Nancy     | Davolio   | Seattle  | Albuquerque     |
+| Andrew    | Fuller    | Tacoma   | Albuquerque     |
+| Janet     | Leverling | Kirkland | Albuquerque     |
+| Margaret  | Peacock   | Redmond  | Albuquerque     |
+| Steven    | Buchanan  | London   | Albuquerque     |
+| Michael   | Suyama    | London   | Albuquerque     |
+| Robert    | King      | London   | Albuquerque     |
+| Laura     | Callahan  | Seattle  | Albuquerque     |
+| Anne      | Dodsworth | London   | Albuquerque     |
+| Nancy     | Davolio   | Seattle  | Brcke           |
+| Andrew    | Fuller    | Tacoma   | Brcke           |
+| Janet     | Leverling | Kirkland | Brcke           |
+| Margaret  | Peacock   | Redmond  | Brcke           |
+| Steven    | Buchanan  | London   | Brcke           |
+| Michael   | Suyama    | London   | Brcke           |
+| Robert    | King      | London   | Brcke           |
+| Laura     | Callahan  | Seattle  | Brcke           |
+| Anne      | Dodsworth | London   | Brcke           |
+| Nancy     | Davolio   | Seattle  | Strasbourg      |
+| Andrew    | Fuller    | Tacoma   | Strasbourg      |
+| Janet     | Leverling | Kirkland | Strasbourg      |
+| Margaret  | Peacock   | Redmond  | Strasbourg      |
+| Steven    | Buchanan  | London   | Strasbourg      |
+| Michael   | Suyama    | London   | Strasbourg      |
+| Robert    | King      | London   | Strasbourg      |
+| Laura     | Callahan  | Seattle  | Strasbourg      |
+| Anne      | Dodsworth | London   | Strasbourg      |
+| Nancy     | Davolio   | Seattle  | Oulu            |
+| Andrew    | Fuller    | Tacoma   | Oulu            |
+| Janet     | Leverling | Kirkland | Oulu            |
+| Margaret  | Peacock   | Redmond  | Oulu            |
+| Steven    | Buchanan  | London   | Oulu            |
+| Michael   | Suyama    | London   | Oulu            |
+| Robert    | King      | London   | Oulu            |
+| Laura     | Callahan  | Seattle  | Oulu            |
+| Anne      | Dodsworth | London   | Oulu            |
+| Nancy     | Davolio   | Seattle  | Mnchen          |
+| Andrew    | Fuller    | Tacoma   | Mnchen          |
+| Janet     | Leverling | Kirkland | Mnchen          |
+| Margaret  | Peacock   | Redmond  | Mnchen          |
+| Steven    | Buchanan  | London   | Mnchen          |
+| Michael   | Suyama    | London   | Mnchen          |
+| Robert    | King      | London   | Mnchen          |
+| Laura     | Callahan  | Seattle  | Mnchen          |
+| Anne      | Dodsworth | London   | Mnchen          |
+| Nancy     | Davolio   | Seattle  | Caracas         |
+| Andrew    | Fuller    | Tacoma   | Caracas         |
+| Janet     | Leverling | Kirkland | Caracas         |
+| Margaret  | Peacock   | Redmond  | Caracas         |
+| Steven    | Buchanan  | London   | Caracas         |
+| Michael   | Suyama    | London   | Caracas         |
+| Robert    | King      | London   | Caracas         |
+| Laura     | Callahan  | Seattle  | Caracas         |
+| Anne      | Dodsworth | London   | Caracas         |
+| Andrew    | Fuller    | Tacoma   | Seattle         |
+| Janet     | Leverling | Kirkland | Seattle         |
+| Margaret  | Peacock   | Redmond  | Seattle         |
+| Steven    | Buchanan  | London   | Seattle         |
+| Michael   | Suyama    | London   | Seattle         |
+| Robert    | King      | London   | Seattle         |
+| Anne      | Dodsworth | London   | Seattle         |
+| Nancy     | Davolio   | Seattle  | Lander          |
+| Andrew    | Fuller    | Tacoma   | Lander          |
+| Janet     | Leverling | Kirkland | Lander          |
+| Margaret  | Peacock   | Redmond  | Lander          |
+| Steven    | Buchanan  | London   | Lander          |
+| Michael   | Suyama    | London   | Lander          |
+| Robert    | King      | London   | Lander          |
+| Laura     | Callahan  | Seattle  | Lander          |
+| Anne      | Dodsworth | London   | Lander          |
+| Nancy     | Davolio   | Seattle  | Cunewalde       |
+| Andrew    | Fuller    | Tacoma   | Cunewalde       |
+| Janet     | Leverling | Kirkland | Cunewalde       |
+| Margaret  | Peacock   | Redmond  | Cunewalde       |
+| Steven    | Buchanan  | London   | Cunewalde       |
+| Michael   | Suyama    | London   | Cunewalde       |
+| Robert    | King      | London   | Cunewalde       |
+| Laura     | Callahan  | Seattle  | Cunewalde       |
+| Anne      | Dodsworth | London   | Cunewalde       |
+| Nancy     | Davolio   | Seattle  | Bergamo         |
+| Andrew    | Fuller    | Tacoma   | Bergamo         |
+| Janet     | Leverling | Kirkland | Bergamo         |
+| Margaret  | Peacock   | Redmond  | Bergamo         |
+| Steven    | Buchanan  | London   | Bergamo         |
+| Michael   | Suyama    | London   | Bergamo         |
+| Robert    | King      | London   | Bergamo         |
+| Laura     | Callahan  | Seattle  | Bergamo         |
+| Anne      | Dodsworth | London   | Bergamo         |
+| Nancy     | Davolio   | Seattle  | Leipzig         |
+| Andrew    | Fuller    | Tacoma   | Leipzig         |
+| Janet     | Leverling | Kirkland | Leipzig         |
+| Margaret  | Peacock   | Redmond  | Leipzig         |
+| Steven    | Buchanan  | London   | Leipzig         |
+| Michael   | Suyama    | London   | Leipzig         |
+| Robert    | King      | London   | Leipzig         |
+| Laura     | Callahan  | Seattle  | Leipzig         |
+| Anne      | Dodsworth | London   | Leipzig         |
+| Nancy     | Davolio   | Seattle  | Lule            |
+| Andrew    | Fuller    | Tacoma   | Lule            |
+| Janet     | Leverling | Kirkland | Lule            |
+| Margaret  | Peacock   | Redmond  | Lule            |
+| Steven    | Buchanan  | London   | Lule            |
+| Michael   | Suyama    | London   | Lule            |
+| Robert    | King      | London   | Lule            |
+| Laura     | Callahan  | Seattle  | Lule            |
+| Anne      | Dodsworth | London   | Lule            |
+| Nancy     | Davolio   | Seattle  | Frankfurt a.M.  |
+| Andrew    | Fuller    | Tacoma   | Frankfurt a.M.  |
+| Janet     | Leverling | Kirkland | Frankfurt a.M.  |
+| Margaret  | Peacock   | Redmond  | Frankfurt a.M.  |
+| Steven    | Buchanan  | London   | Frankfurt a.M.  |
+| Michael   | Suyama    | London   | Frankfurt a.M.  |
+| Robert    | King      | London   | Frankfurt a.M.  |
+| Laura     | Callahan  | Seattle  | Frankfurt a.M.  |
+| Anne      | Dodsworth | London   | Frankfurt a.M.  |
+| Nancy     | Davolio   | Seattle  | Madrid          |
+| Andrew    | Fuller    | Tacoma   | Madrid          |
+| Janet     | Leverling | Kirkland | Madrid          |
+| Margaret  | Peacock   | Redmond  | Madrid          |
+| Steven    | Buchanan  | London   | Madrid          |
+| Michael   | Suyama    | London   | Madrid          |
+| Robert    | King      | London   | Madrid          |
+| Laura     | Callahan  | Seattle  | Madrid          |
+| Anne      | Dodsworth | London   | Madrid          |
+| Nancy     | Davolio   | Seattle  | Barquisimeto    |
+| Andrew    | Fuller    | Tacoma   | Barquisimeto    |
+| Janet     | Leverling | Kirkland | Barquisimeto    |
+| Margaret  | Peacock   | Redmond  | Barquisimeto    |
+| Steven    | Buchanan  | London   | Barquisimeto    |
+| Michael   | Suyama    | London   | Barquisimeto    |
+| Robert    | King      | London   | Barquisimeto    |
+| Laura     | Callahan  | Seattle  | Barquisimeto    |
+| Anne      | Dodsworth | London   | Barquisimeto    |
+| Nancy     | Davolio   | Seattle  | Reggio Emilia   |
+| Andrew    | Fuller    | Tacoma   | Reggio Emilia   |
+| Janet     | Leverling | Kirkland | Reggio Emilia   |
+| Margaret  | Peacock   | Redmond  | Reggio Emilia   |
+| Steven    | Buchanan  | London   | Reggio Emilia   |
+| Michael   | Suyama    | London   | Reggio Emilia   |
+| Robert    | King      | London   | Reggio Emilia   |
+| Laura     | Callahan  | Seattle  | Reggio Emilia   |
+| Anne      | Dodsworth | London   | Reggio Emilia   |
+| Nancy     | Davolio   | Seattle  | London          |
+| Andrew    | Fuller    | Tacoma   | London          |
+| Janet     | Leverling | Kirkland | London          |
+| Margaret  | Peacock   | Redmond  | London          |
+| Laura     | Callahan  | Seattle  | London          |
+| Nancy     | Davolio   | Seattle  | Sao Paulo       |
+| Andrew    | Fuller    | Tacoma   | Sao Paulo       |
+| Janet     | Leverling | Kirkland | Sao Paulo       |
+| Margaret  | Peacock   | Redmond  | Sao Paulo       |
+| Steven    | Buchanan  | London   | Sao Paulo       |
+| Michael   | Suyama    | London   | Sao Paulo       |
+| Robert    | King      | London   | Sao Paulo       |
+| Laura     | Callahan  | Seattle  | Sao Paulo       |
+| Anne      | Dodsworth | London   | Sao Paulo       |
+| Nancy     | Davolio   | Seattle  | Cork            |
+| Andrew    | Fuller    | Tacoma   | Cork            |
+| Janet     | Leverling | Kirkland | Cork            |
+| Margaret  | Peacock   | Redmond  | Cork            |
+| Steven    | Buchanan  | London   | Cork            |
+| Michael   | Suyama    | London   | Cork            |
+| Robert    | King      | London   | Cork            |
+| Laura     | Callahan  | Seattle  | Cork            |
+| Anne      | Dodsworth | London   | Cork            |
+| Nancy     | Davolio   | Seattle  | Stuttgart       |
+| Andrew    | Fuller    | Tacoma   | Stuttgart       |
+| Janet     | Leverling | Kirkland | Stuttgart       |
+| Margaret  | Peacock   | Redmond  | Stuttgart       |
+| Steven    | Buchanan  | London   | Stuttgart       |
+| Michael   | Suyama    | London   | Stuttgart       |
+| Robert    | King      | London   | Stuttgart       |
+| Laura     | Callahan  | Seattle  | Stuttgart       |
+| Anne      | Dodsworth | London   | Stuttgart       |
+| Nancy     | Davolio   | Seattle  | Sevilla         |
+| Andrew    | Fuller    | Tacoma   | Sevilla         |
+| Janet     | Leverling | Kirkland | Sevilla         |
+| Margaret  | Peacock   | Redmond  | Sevilla         |
+| Steven    | Buchanan  | London   | Sevilla         |
+| Michael   | Suyama    | London   | Sevilla         |
+| Robert    | King      | London   | Sevilla         |
+| Laura     | Callahan  | Seattle  | Sevilla         |
+| Anne      | Dodsworth | London   | Sevilla         |
+| Nancy     | Davolio   | Seattle  | Anchorage       |
+| Andrew    | Fuller    | Tacoma   | Anchorage       |
+| Janet     | Leverling | Kirkland | Anchorage       |
+| Margaret  | Peacock   | Redmond  | Anchorage       |
+| Steven    | Buchanan  | London   | Anchorage       |
+| Michael   | Suyama    | London   | Anchorage       |
+| Robert    | King      | London   | Anchorage       |
+| Laura     | Callahan  | Seattle  | Anchorage       |
+| Anne      | Dodsworth | London   | Anchorage       |
+| Nancy     | Davolio   | Seattle  | Portland        |
+| Andrew    | Fuller    | Tacoma   | Portland        |
+| Janet     | Leverling | Kirkland | Portland        |
+| Margaret  | Peacock   | Redmond  | Portland        |
+| Steven    | Buchanan  | London   | Portland        |
+| Michael   | Suyama    | London   | Portland        |
+| Robert    | King      | London   | Portland        |
+| Laura     | Callahan  | Seattle  | Portland        |
+| Anne      | Dodsworth | London   | Portland        |
+| Nancy     | Davolio   | Seattle  | Nantes          |
+| Andrew    | Fuller    | Tacoma   | Nantes          |
+| Janet     | Leverling | Kirkland | Nantes          |
+| Margaret  | Peacock   | Redmond  | Nantes          |
+| Steven    | Buchanan  | London   | Nantes          |
+| Michael   | Suyama    | London   | Nantes          |
+| Robert    | King      | London   | Nantes          |
+| Laura     | Callahan  | Seattle  | Nantes          |
+| Anne      | Dodsworth | London   | Nantes          |
+| Nancy     | Davolio   | Seattle  | Cowes           |
+| Andrew    | Fuller    | Tacoma   | Cowes           |
+| Janet     | Leverling | Kirkland | Cowes           |
+| Margaret  | Peacock   | Redmond  | Cowes           |
+| Steven    | Buchanan  | London   | Cowes           |
+| Michael   | Suyama    | London   | Cowes           |
+| Robert    | King      | London   | Cowes           |
+| Laura     | Callahan  | Seattle  | Cowes           |
+| Anne      | Dodsworth | London   | Cowes           |
+| Nancy     | Davolio   | Seattle  | Brandenburg     |
+| Andrew    | Fuller    | Tacoma   | Brandenburg     |
+| Janet     | Leverling | Kirkland | Brandenburg     |
+| Margaret  | Peacock   | Redmond  | Brandenburg     |
+| Steven    | Buchanan  | London   | Brandenburg     |
+| Michael   | Suyama    | London   | Brandenburg     |
+| Robert    | King      | London   | Brandenburg     |
+| Laura     | Callahan  | Seattle  | Brandenburg     |
+| Anne      | Dodsworth | London   | Brandenburg     |
+| Nancy     | Davolio   | Seattle  | Boise           |
+| Andrew    | Fuller    | Tacoma   | Boise           |
+| Janet     | Leverling | Kirkland | Boise           |
+| Margaret  | Peacock   | Redmond  | Boise           |
+| Steven    | Buchanan  | London   | Boise           |
+| Michael   | Suyama    | London   | Boise           |
+| Robert    | King      | London   | Boise           |
+| Laura     | Callahan  | Seattle  | Boise           |
+| Anne      | Dodsworth | London   | Boise           |
+| Nancy     | Davolio   | Seattle  | Lisboa          |
+| Andrew    | Fuller    | Tacoma   | Lisboa          |
+| Janet     | Leverling | Kirkland | Lisboa          |
+| Margaret  | Peacock   | Redmond  | Lisboa          |
+| Steven    | Buchanan  | London   | Lisboa          |
+| Michael   | Suyama    | London   | Lisboa          |
+| Robert    | King      | London   | Lisboa          |
+| Laura     | Callahan  | Seattle  | Lisboa          |
+| Anne      | Dodsworth | London   | Lisboa          |
+| Nancy     | Davolio   | Seattle  | Marseille       |
+| Andrew    | Fuller    | Tacoma   | Marseille       |
+| Janet     | Leverling | Kirkland | Marseille       |
+| Margaret  | Peacock   | Redmond  | Marseille       |
+| Steven    | Buchanan  | London   | Marseille       |
+| Michael   | Suyama    | London   | Marseille       |
+| Robert    | King      | London   | Marseille       |
+| Laura     | Callahan  | Seattle  | Marseille       |
+| Anne      | Dodsworth | London   | Marseille       |
+| Nancy     | Davolio   | Seattle  | Montral         |
+| Andrew    | Fuller    | Tacoma   | Montral         |
+| Janet     | Leverling | Kirkland | Montral         |
+| Margaret  | Peacock   | Redmond  | Montral         |
+| Steven    | Buchanan  | London   | Montral         |
+| Michael   | Suyama    | London   | Montral         |
+| Robert    | King      | London   | Montral         |
+| Laura     | Callahan  | Seattle  | Montral         |
+| Anne      | Dodsworth | London   | Montral         |
+| Nancy     | Davolio   | Seattle  | Kobenhavn       |
+| Andrew    | Fuller    | Tacoma   | Kobenhavn       |
+| Janet     | Leverling | Kirkland | Kobenhavn       |
+| Margaret  | Peacock   | Redmond  | Kobenhavn       |
+| Steven    | Buchanan  | London   | Kobenhavn       |
+| Michael   | Suyama    | London   | Kobenhavn       |
+| Robert    | King      | London   | Kobenhavn       |
+| Laura     | Callahan  | Seattle  | Kobenhavn       |
+| Anne      | Dodsworth | London   | Kobenhavn       |
+| Nancy     | Davolio   | Seattle  | Toulouse        |
+| Andrew    | Fuller    | Tacoma   | Toulouse        |
+| Janet     | Leverling | Kirkland | Toulouse        |
+| Margaret  | Peacock   | Redmond  | Toulouse        |
+| Steven    | Buchanan  | London   | Toulouse        |
+| Michael   | Suyama    | London   | Toulouse        |
+| Robert    | King      | London   | Toulouse        |
+| Laura     | Callahan  | Seattle  | Toulouse        |
+| Anne      | Dodsworth | London   | Toulouse        |
+| Nancy     | Davolio   | Seattle  | Salzburg        |
+| Andrew    | Fuller    | Tacoma   | Salzburg        |
+| Janet     | Leverling | Kirkland | Salzburg        |
+| Margaret  | Peacock   | Redmond  | Salzburg        |
+| Steven    | Buchanan  | London   | Salzburg        |
+| Michael   | Suyama    | London   | Salzburg        |
+| Robert    | King      | London   | Salzburg        |
+| Laura     | Callahan  | Seattle  | Salzburg        |
+| Anne      | Dodsworth | London   | Salzburg        |
+| Nancy     | Davolio   | Seattle  | Colchester      |
+| Andrew    | Fuller    | Tacoma   | Colchester      |
+| Janet     | Leverling | Kirkland | Colchester      |
+| Margaret  | Peacock   | Redmond  | Colchester      |
+| Steven    | Buchanan  | London   | Colchester      |
+| Michael   | Suyama    | London   | Colchester      |
+| Robert    | King      | London   | Colchester      |
+| Laura     | Callahan  | Seattle  | Colchester      |
+| Anne      | Dodsworth | London   | Colchester      |
+| Nancy     | Davolio   | Seattle  | Aachen          |
+| Andrew    | Fuller    | Tacoma   | Aachen          |
+| Janet     | Leverling | Kirkland | Aachen          |
+| Margaret  | Peacock   | Redmond  | Aachen          |
+| Steven    | Buchanan  | London   | Aachen          |
+| Michael   | Suyama    | London   | Aachen          |
+| Robert    | King      | London   | Aachen          |
+| Laura     | Callahan  | Seattle  | Aachen          |
+| Anne      | Dodsworth | London   | Aachen          |
+| Nancy     | Davolio   | Seattle  | Barcelona       |
+| Andrew    | Fuller    | Tacoma   | Barcelona       |
+| Janet     | Leverling | Kirkland | Barcelona       |
+| Margaret  | Peacock   | Redmond  | Barcelona       |
+| Steven    | Buchanan  | London   | Barcelona       |
+| Michael   | Suyama    | London   | Barcelona       |
+| Robert    | King      | London   | Barcelona       |
+| Laura     | Callahan  | Seattle  | Barcelona       |
+| Anne      | Dodsworth | London   | Barcelona       |
+| Nancy     | Davolio   | Seattle  | rhus            |
+| Andrew    | Fuller    | Tacoma   | rhus            |
+| Janet     | Leverling | Kirkland | rhus            |
+| Margaret  | Peacock   | Redmond  | rhus            |
+| Steven    | Buchanan  | London   | rhus            |
+| Michael   | Suyama    | London   | rhus            |
+| Robert    | King      | London   | rhus            |
+| Laura     | Callahan  | Seattle  | rhus            |
+| Anne      | Dodsworth | London   | rhus            |
+| Nancy     | Davolio   | Seattle  | Warszawa        |
+| Andrew    | Fuller    | Tacoma   | Warszawa        |
+| Janet     | Leverling | Kirkland | Warszawa        |
+| Margaret  | Peacock   | Redmond  | Warszawa        |
+| Steven    | Buchanan  | London   | Warszawa        |
+| Michael   | Suyama    | London   | Warszawa        |
+| Robert    | King      | London   | Warszawa        |
+| Laura     | Callahan  | Seattle  | Warszawa        |
+| Anne      | Dodsworth | London   | Warszawa        |
+| Nancy     | Davolio   | Seattle  | Elgin           |
+| Andrew    | Fuller    | Tacoma   | Elgin           |
+| Janet     | Leverling | Kirkland | Elgin           |
+| Margaret  | Peacock   | Redmond  | Elgin           |
+| Steven    | Buchanan  | London   | Elgin           |
+| Michael   | Suyama    | London   | Elgin           |
+| Robert    | King      | London   | Elgin           |
+| Laura     | Callahan  | Seattle  | Elgin           |
+| Anne      | Dodsworth | London   | Elgin           |
+| Nancy     | Davolio   | Seattle  | Stavern         |
+| Andrew    | Fuller    | Tacoma   | Stavern         |
+| Janet     | Leverling | Kirkland | Stavern         |
+| Margaret  | Peacock   | Redmond  | Stavern         |
+| Steven    | Buchanan  | London   | Stavern         |
+| Michael   | Suyama    | London   | Stavern         |
+| Robert    | King      | London   | Stavern         |
+| Laura     | Callahan  | Seattle  | Stavern         |
+| Anne      | Dodsworth | London   | Stavern         |
+| Nancy     | Davolio   | Seattle  | Tsawassen       |
+| Andrew    | Fuller    | Tacoma   | Tsawassen       |
+| Janet     | Leverling | Kirkland | Tsawassen       |
+| Margaret  | Peacock   | Redmond  | Tsawassen       |
+| Steven    | Buchanan  | London   | Tsawassen       |
+| Michael   | Suyama    | London   | Tsawassen       |
+| Robert    | King      | London   | Tsawassen       |
+| Laura     | Callahan  | Seattle  | Tsawassen       |
+| Anne      | Dodsworth | London   | Tsawassen       |
+| Nancy     | Davolio   | Seattle  | I. de Margarita |
+| Andrew    | Fuller    | Tacoma   | I. de Margarita |
+| Janet     | Leverling | Kirkland | I. de Margarita |
+| Margaret  | Peacock   | Redmond  | I. de Margarita |
+| Steven    | Buchanan  | London   | I. de Margarita |
+| Michael   | Suyama    | London   | I. de Margarita |
+| Robert    | King      | London   | I. de Margarita |
+| Laura     | Callahan  | Seattle  | I. de Margarita |
+| Anne      | Dodsworth | London   | I. de Margarita |
+| Nancy     | Davolio   | Seattle  | Lille           |
+| Andrew    | Fuller    | Tacoma   | Lille           |
+| Janet     | Leverling | Kirkland | Lille           |
+| Margaret  | Peacock   | Redmond  | Lille           |
+| Steven    | Buchanan  | London   | Lille           |
+| Michael   | Suyama    | London   | Lille           |
+| Robert    | King      | London   | Lille           |
+| Laura     | Callahan  | Seattle  | Lille           |
+| Anne      | Dodsworth | London   | Lille           |
+| Nancy     | Davolio   | Seattle  | Buenos Aires    |
+| Andrew    | Fuller    | Tacoma   | Buenos Aires    |
+| Janet     | Leverling | Kirkland | Buenos Aires    |
+| Margaret  | Peacock   | Redmond  | Buenos Aires    |
+| Steven    | Buchanan  | London   | Buenos Aires    |
+| Michael   | Suyama    | London   | Buenos Aires    |
+| Robert    | King      | London   | Buenos Aires    |
+| Laura     | Callahan  | Seattle  | Buenos Aires    |
+| Anne      | Dodsworth | London   | Buenos Aires    |
+| Nancy     | Davolio   | Seattle  | Torino          |
+| Andrew    | Fuller    | Tacoma   | Torino          |
+| Janet     | Leverling | Kirkland | Torino          |
+| Margaret  | Peacock   | Redmond  | Torino          |
+| Steven    | Buchanan  | London   | Torino          |
+| Michael   | Suyama    | London   | Torino          |
+| Robert    | King      | London   | Torino          |
+| Laura     | Callahan  | Seattle  | Torino          |
+| Anne      | Dodsworth | London   | Torino          |
+| Nancy     | Davolio   | Seattle  | Campinas        |
+| Andrew    | Fuller    | Tacoma   | Campinas        |
+| Janet     | Leverling | Kirkland | Campinas        |
+| Margaret  | Peacock   | Redmond  | Campinas        |
+| Steven    | Buchanan  | London   | Campinas        |
+| Michael   | Suyama    | London   | Campinas        |
+| Robert    | King      | London   | Campinas        |
+| Laura     | Callahan  | Seattle  | Campinas        |
+| Anne      | Dodsworth | London   | Campinas        |
+| Nancy     | Davolio   | Seattle  | Walla Walla     |
+| Andrew    | Fuller    | Tacoma   | Walla Walla     |
+| Janet     | Leverling | Kirkland | Walla Walla     |
+| Margaret  | Peacock   | Redmond  | Walla Walla     |
+| Steven    | Buchanan  | London   | Walla Walla     |
+| Michael   | Suyama    | London   | Walla Walla     |
+| Robert    | King      | London   | Walla Walla     |
+| Laura     | Callahan  | Seattle  | Walla Walla     |
+| Anne      | Dodsworth | London   | Walla Walla     |
+| Nancy     | Davolio   | Seattle  | Vancouver       |
+| Andrew    | Fuller    | Tacoma   | Vancouver       |
+| Janet     | Leverling | Kirkland | Vancouver       |
+| Margaret  | Peacock   | Redmond  | Vancouver       |
+| Steven    | Buchanan  | London   | Vancouver       |
+| Michael   | Suyama    | London   | Vancouver       |
+| Robert    | King      | London   | Vancouver       |
+| Laura     | Callahan  | Seattle  | Vancouver       |
+| Anne      | Dodsworth | London   | Vancouver       |
+| Nancy     | Davolio   | Seattle  | Mannheim        |
+| Andrew    | Fuller    | Tacoma   | Mannheim        |
+| Janet     | Leverling | Kirkland | Mannheim        |
+| Margaret  | Peacock   | Redmond  | Mannheim        |
+| Steven    | Buchanan  | London   | Mannheim        |
+| Michael   | Suyama    | London   | Mannheim        |
+| Robert    | King      | London   | Mannheim        |
+| Laura     | Callahan  | Seattle  | Mannheim        |
+| Anne      | Dodsworth | London   | Mannheim        |
+| Nancy     | Davolio   | Seattle  | Eugene          |
+| Andrew    | Fuller    | Tacoma   | Eugene          |
+| Janet     | Leverling | Kirkland | Eugene          |
+| Margaret  | Peacock   | Redmond  | Eugene          |
+| Steven    | Buchanan  | London   | Eugene          |
+| Michael   | Suyama    | London   | Eugene          |
+| Robert    | King      | London   | Eugene          |
+| Laura     | Callahan  | Seattle  | Eugene          |
+| Anne      | Dodsworth | London   | Eugene          |
+| Nancy     | Davolio   | Seattle  | Bruxelles       |
+| Andrew    | Fuller    | Tacoma   | Bruxelles       |
+| Janet     | Leverling | Kirkland | Bruxelles       |
+| Margaret  | Peacock   | Redmond  | Bruxelles       |
+| Steven    | Buchanan  | London   | Bruxelles       |
+| Michael   | Suyama    | London   | Bruxelles       |
+| Robert    | King      | London   | Bruxelles       |
+| Laura     | Callahan  | Seattle  | Bruxelles       |
+| Anne      | Dodsworth | London   | Bruxelles       |
+| Nancy     | Davolio   | Seattle  | Kirkland        |
+| Andrew    | Fuller    | Tacoma   | Kirkland        |
+| Margaret  | Peacock   | Redmond  | Kirkland        |
+| Steven    | Buchanan  | London   | Kirkland        |
+| Michael   | Suyama    | London   | Kirkland        |
+| Robert    | King      | London   | Kirkland        |
+| Laura     | Callahan  | Seattle  | Kirkland        |
+| Anne      | Dodsworth | London   | Kirkland        |
+| Nancy     | Davolio   | Seattle  | San Francisco   |
+| Andrew    | Fuller    | Tacoma   | San Francisco   |
+| Janet     | Leverling | Kirkland | San Francisco   |
+| Margaret  | Peacock   | Redmond  | San Francisco   |
+| Steven    | Buchanan  | London   | San Francisco   |
+| Michael   | Suyama    | London   | San Francisco   |
+| Robert    | King      | London   | San Francisco   |
+| Laura     | Callahan  | Seattle  | San Francisco   |
+| Anne      | Dodsworth | London   | San Francisco   |
+| Nancy     | Davolio   | Seattle  | Helsinki        |
+| Andrew    | Fuller    | Tacoma   | Helsinki        |
+| Janet     | Leverling | Kirkland | Helsinki        |
+| Margaret  | Peacock   | Redmond  | Helsinki        |
+| Steven    | Buchanan  | London   | Helsinki        |
+| Michael   | Suyama    | London   | Helsinki        |
+| Robert    | King      | London   | Helsinki        |
+| Laura     | Callahan  | Seattle  | Helsinki        |
+| Anne      | Dodsworth | London   | Helsinki        |
+| Nancy     | Davolio   | Seattle  | Butte           |
+| Andrew    | Fuller    | Tacoma   | Butte           |
+| Janet     | Leverling | Kirkland | Butte           |
+| Margaret  | Peacock   | Redmond  | Butte           |
+| Steven    | Buchanan  | London   | Butte           |
+| Michael   | Suyama    | London   | Butte           |
+| Robert    | King      | London   | Butte           |
+| Laura     | Callahan  | Seattle  | Butte           |
+| Anne      | Dodsworth | London   | Butte           |
+| Nancy     | Davolio   | Seattle  | Berlin          |
+| Andrew    | Fuller    | Tacoma   | Berlin          |
+| Janet     | Leverling | Kirkland | Berlin          |
+| Margaret  | Peacock   | Redmond  | Berlin          |
+| Steven    | Buchanan  | London   | Berlin          |
+| Michael   | Suyama    | London   | Berlin          |
+| Robert    | King      | London   | Berlin          |
+| Laura     | Callahan  | Seattle  | Berlin          |
+| Anne      | Dodsworth | London   | Berlin          |
+| Nancy     | Davolio   | Seattle  | Paris           |
+| Andrew    | Fuller    | Tacoma   | Paris           |
+| Janet     | Leverling | Kirkland | Paris           |
+| Margaret  | Peacock   | Redmond  | Paris           |
+| Steven    | Buchanan  | London   | Paris           |
+| Michael   | Suyama    | London   | Paris           |
+| Robert    | King      | London   | Paris           |
+| Laura     | Callahan  | Seattle  | Paris           |
+| Anne      | Dodsworth | London   | Paris           |
+| Nancy     | Davolio   | Seattle  | Versailles      |
+| Andrew    | Fuller    | Tacoma   | Versailles      |
+| Janet     | Leverling | Kirkland | Versailles      |
+| Margaret  | Peacock   | Redmond  | Versailles      |
+| Steven    | Buchanan  | London   | Versailles      |
+| Michael   | Suyama    | London   | Versailles      |
+| Robert    | King      | London   | Versailles      |
+| Laura     | Callahan  | Seattle  | Versailles      |
+| Anne      | Dodsworth | London   | Versailles      |
++-----------+-----------+----------+-----------------+
+623 rows in set (0.03 sec)
+
+mysql> 
+
+#
+#
+QUestion
+#
+#
+mysql> select companyname from Shippers inner join Categories on categoryname="seafood";
++------------------+
+| companyname      |
++------------------+
+| Speedy Express   |
+| United Package   |
+| Federal Shipping |
++------------------+
+3 rows in set (0.04 sec)
+
+mysql> 
+
+
+#
+#
+QUestion
+#
+#
+
+
+
+
+mysql> Select orderid,round(((Unitprice*quantity)-((unitprice*quantity)/100)*discount),2) as `Total Price` from `Order Details`;
++---------+-------------+
+| orderid | Total Price |
++---------+-------------+
+|   10248 |      168.00 |
+|   10248 |       98.00 |
+|   10248 |      174.00 |
+|   10249 |      167.40 |
+|   10249 |     1696.00 |
+|   10250 |       77.00 |
+|   10250 |     1484.00 |
+|   10250 |      252.00 |
+|   10251 |      100.80 |
+|   10251 |      234.00 |
+|   10251 |      336.00 |
+|   10252 |     2592.00 |
+|   10252 |       50.00 |
+|   10252 |     1088.00 |
+|   10253 |      200.00 |
+|   10253 |      604.80 |
+|   10253 |      640.00 |
+|   10254 |       54.00 |
+|   10254 |      403.20 |
+|   10254 |      168.00 |
+|   10255 |      304.00 |
+|   10255 |      486.50 |
+|   10255 |      380.00 |
+|   10255 |     1320.00 |
+|   10256 |      393.00 |
+|   10256 |      124.80 |
+|   10257 |      877.50 |
+|   10257 |       86.40 |
+|   10257 |      156.00 |
+|   10258 |      760.00 |
+|   10258 |     1105.00 |
+|   10258 |      153.60 |
+|   10259 |       80.00 |
+|   10259 |       20.80 |
+|   10260 |      123.20 |
+|   10260 |      780.00 |
+|   10260 |      591.00 |
+|   10260 |      252.00 |
+|   10261 |      160.00 |
+|   10261 |      288.00 |
+|   10262 |      204.00 |
+|   10262 |      360.00 |
+|   10262 |       60.80 |
+|   10263 |      834.00 |
+|   10263 |      100.80 |
+|   10263 |     1242.00 |
+|   10263 |      288.00 |
+|   10264 |      532.00 |
+|   10264 |      192.50 |
+|   10265 |      936.00 |
+|   10265 |      240.00 |
+|   10266 |      364.80 |
+|   10267 |      735.00 |
+|   10267 |     3080.00 |
+|   10267 |      216.00 |
+|   10268 |      990.00 |
+|   10268 |      111.20 |
+|   10269 |      120.00 |
+|   10269 |      556.00 |
+|   10270 |      456.00 |
+|   10270 |      920.00 |
+|   10271 |       48.00 |
+|   10272 |      388.80 |
+|   10272 |      400.00 |
+|   10272 |      667.20 |
+|   10273 |      595.20 |
+|   10273 |      150.00 |
+|   10273 |       40.00 |
+|   10273 |      882.00 |
+|   10273 |      475.20 |
+|   10274 |      344.00 |
+|   10274 |      194.60 |
+|   10275 |       43.20 |
+|   10275 |      264.00 |
+|   10276 |      372.00 |
+|   10276 |       48.00 |
+|   10277 |      728.00 |
+|   10277 |      472.80 |
+|   10278 |      248.00 |
+|   10278 |      660.00 |
+|   10278 |      280.80 |
+|   10278 |      300.00 |
+|   10279 |      468.00 |
+|   10280 |       43.20 |
+|   10280 |      384.00 |
+|   10280 |      186.00 |
+|   10281 |        7.30 |
+|   10281 |       21.60 |
+|   10281 |       57.60 |
+|   10282 |      124.20 |
+|   10282 |       31.20 |
+|   10283 |      248.00 |
+|   10283 |      131.40 |
+|   10283 |      952.00 |
+|   10283 |       83.40 |
+|   10284 |      526.50 |
+|   10284 |      325.50 |
+|   10284 |      544.00 |
+|   10284 |       56.00 |
+|   10285 |      648.00 |
+|   10285 |      588.00 |
+|   10285 |      943.20 |
+|   10286 |     1440.00 |
+|   10286 |     1576.00 |
+|   10287 |      556.00 |
+|   10287 |      224.00 |
+|   10287 |      144.00 |
+|   10288 |       59.00 |
+|   10288 |       30.00 |
+|   10289 |      240.00 |
+|   10289 |      239.40 |
+|   10290 |      340.00 |
+|   10290 |     1485.00 |
+|   10290 |      240.00 |
+|   10290 |      104.00 |
+|   10291 |       96.00 |
+|   10291 |      372.00 |
+|   10291 |       84.80 |
+|   10292 |     1296.00 |
+|   10293 |      600.00 |
+|   10293 |       36.00 |
+|   10293 |      175.50 |
+|   10293 |       37.20 |
+|   10294 |      259.20 |
+|   10294 |      468.00 |
+|   10294 |      552.00 |
+|   10294 |      571.20 |
+|   10294 |       37.20 |
+|   10295 |      121.60 |
+|   10296 |      201.60 |
+|   10296 |      417.00 |
+|   10296 |      432.00 |
+|   10297 |      864.00 |
+|   10297 |      556.00 |
+|   10298 |      608.00 |
+|   10298 |      608.00 |
+|   10298 |     1320.00 |
+|   10298 |      591.00 |
+|   10299 |      109.50 |
+|   10299 |      240.00 |
+|   10300 |      408.00 |
+|   10300 |      200.00 |
+|   10301 |      147.00 |
+|   10301 |      608.00 |
+|   10302 |     1248.00 |
+|   10302 |     1019.20 |
+|   10302 |      441.60 |
+|   10303 |      588.00 |
+|   10303 |      504.00 |
+|   10303 |      150.00 |
+|   10304 |      480.00 |
+|   10304 |      440.00 |
+|   10304 |       34.40 |
+|   10305 |     1250.00 |
+|   10305 |     2475.00 |
+|   10305 |      432.00 |
+|   10306 |      207.00 |
+|   10306 |      262.00 |
+|   10306 |       29.50 |
+|   10307 |      394.00 |
+|   10307 |       30.00 |
+|   10308 |       28.80 |
+|   10308 |       60.00 |
+|   10309 |      352.00 |
+|   10309 |      600.00 |
+|   10309 |       22.40 |
+|   10309 |      736.00 |
+|   10309 |       51.60 |
+|   10310 |      139.00 |
+|   10310 |      197.00 |
+|   10311 |       67.20 |
+|   10311 |      201.60 |
+|   10312 |      145.60 |
+|   10312 |      883.20 |
+|   10312 |      524.00 |
+|   10312 |       62.00 |
+|   10313 |      182.40 |
+|   10314 |     1024.00 |
+|   10314 |      318.00 |
+|   10314 |      985.00 |
+|   10315 |      156.80 |
+|   10315 |      360.00 |
+|   10316 |       77.00 |
+|   10316 |     2758.00 |
+|   10317 |      288.00 |
+|   10318 |      154.00 |
+|   10318 |       86.40 |
+|   10319 |      249.60 |
+|   10319 |      509.60 |
+|   10319 |      432.00 |
+|   10320 |      516.00 |
+|   10321 |      144.00 |
+|   10322 |      112.00 |
+|   10323 |       62.00 |
+|   10323 |       44.80 |
+|   10323 |       57.60 |
+|   10324 |      291.90 |
+|   10324 |     1008.00 |
+|   10324 |      288.00 |
+|   10324 |     1760.00 |
+|   10324 |     2808.00 |
+|   10325 |      120.00 |
+|   10325 |       57.60 |
+|   10325 |      167.40 |
+|   10325 |       40.00 |
+|   10325 |     1112.00 |
+|   10326 |      422.40 |
+|   10326 |      249.60 |
+|   10326 |      310.00 |
+|   10327 |      380.00 |
+|   10327 |      840.00 |
+|   10327 |      724.50 |
+|   10327 |      318.00 |
+|   10328 |      396.00 |
+|   10328 |      672.00 |
+|   10328 |      100.00 |
+|   10329 |       73.00 |
+|   10329 |      165.60 |
+|   10329 |     4216.00 |
+|   10329 |      364.80 |
+|   10330 |     1245.00 |
+|   10330 |      695.00 |
+|   10331 |       88.50 |
+|   10332 |     2000.00 |
+|   10332 |      112.00 |
+|   10332 |      121.60 |
+|   10333 |      186.00 |
+|   10333 |       80.00 |
+|   10333 |      688.00 |
+|   10334 |       44.80 |
+|   10334 |      100.00 |
+|   10335 |      106.40 |
+|   10335 |      250.00 |
+|   10335 |      153.60 |
+|   10335 |     2035.20 |
+|   10336 |      316.80 |
+|   10337 |      288.00 |
+|   10337 |      597.60 |
+|   10337 |      304.00 |
+|   10337 |      582.40 |
+|   10337 |      695.00 |
+|   10338 |      624.00 |
+|   10338 |      310.50 |
+|   10339 |      176.00 |
+|   10339 |     2184.00 |
+|   10339 |     1103.20 |
+|   10340 |     1000.00 |
+|   10340 |       92.40 |
+|   10340 |     1472.00 |
+|   10341 |       16.00 |
+|   10341 |      396.00 |
+|   10342 |      364.80 |
+|   10342 |      560.00 |
+|   10342 |      608.00 |
+|   10342 |      768.00 |
+|   10343 |     1330.00 |
+|   10343 |       40.00 |
+|   10343 |      216.00 |
+|   10344 |      616.00 |
+|   10344 |     2240.00 |
+|   10345 |     2240.00 |
+|   10345 |      584.00 |
+|   10345 |      100.80 |
+|   10346 |     1123.20 |
+|   10346 |      608.00 |
+|   10347 |      112.00 |
+|   10347 |      720.00 |
+|   10347 |       58.80 |
+|   10347 |       37.20 |
+|   10348 |      216.00 |
+|   10348 |      180.00 |
+|   10349 |      141.60 |
+|   10350 |      195.00 |
+|   10350 |      518.40 |
+|   10351 |     4216.00 |
+|   10351 |      100.10 |
+|   10351 |     1193.50 |
+|   10351 |      168.00 |
+|   10352 |       36.00 |
+|   10352 |      118.00 |
+|   10353 |      201.60 |
+|   10353 |    10540.00 |
+|   10354 |      172.80 |
+|   10354 |      396.00 |
+|   10355 |       90.00 |
+|   10355 |      390.00 |
+|   10356 |      300.00 |
+|   10356 |      230.40 |
+|   10356 |      576.00 |
+|   10357 |      744.00 |
+|   10357 |      398.40 |
+|   10357 |      217.60 |
+|   10358 |       36.00 |
+|   10358 |      112.00 |
+|   10358 |      304.00 |
+|   10359 |      778.40 |
+|   10359 |      700.00 |
+|   10359 |     2176.00 |
+|   10360 |     1092.00 |
+|   10360 |     3465.00 |
+|   10360 |     2108.00 |
+|   10360 |      560.00 |
+|   10360 |      165.20 |
+|   10361 |      777.60 |
+|   10361 |     1496.00 |
+|   10362 |      560.00 |
+|   10362 |      848.00 |
+|   10362 |      141.60 |
+|   10363 |      200.00 |
+|   10363 |       74.40 |
+|   10363 |      172.80 |
+|   10364 |      864.00 |
+|   10364 |       86.00 |
+|   10365 |      403.20 |
+|   10366 |       84.00 |
+|   10366 |       52.00 |
+|   10367 |      403.20 |
+|   10367 |      106.20 |
+|   10367 |      252.00 |
+|   10367 |       72.80 |
+|   10368 |       40.00 |
+|   10368 |      473.20 |
+|   10368 |      390.00 |
+|   10368 |      931.00 |
+|   10369 |     1980.00 |
+|   10369 |      547.20 |
+|   10370 |      216.00 |
+|   10370 |      798.00 |
+|   10370 |      160.00 |
+|   10371 |       91.20 |
+|   10372 |      777.60 |
+|   10372 |     8432.00 |
+|   10372 |     1904.00 |
+|   10372 |     1167.60 |
+|   10373 |      848.00 |
+|   10373 |      860.00 |
+|   10374 |      300.00 |
+|   10374 |      159.00 |
+|   10375 |      279.00 |
+|   10375 |       59.00 |
+|   10376 |      420.00 |
+|   10377 |      728.00 |
+|   10377 |      288.00 |
+|   10378 |      103.20 |
+|   10379 |       61.60 |
+|   10379 |      561.60 |
+|   10379 |      336.00 |
+|   10380 |      372.60 |
+|   10380 |      524.00 |
+|   10380 |      163.20 |
+|   10380 |      360.00 |
+|   10381 |      112.00 |
+|   10382 |      544.00 |
+|   10382 |      450.00 |
+|   10382 |     1386.00 |
+|   10382 |      120.00 |
+|   10382 |      400.00 |
+|   10383 |       96.00 |
+|   10383 |      195.00 |
+|   10383 |      608.00 |
+|   10384 |     1814.40 |
+|   10384 |      408.00 |
+|   10385 |      240.00 |
+|   10385 |      544.00 |
+|   10385 |       80.00 |
+|   10386 |       54.00 |
+|   10386 |      112.00 |
+|   10387 |       54.00 |
+|   10387 |      218.40 |
+|   10387 |      528.00 |
+|   10387 |      258.00 |
+|   10388 |      114.00 |
+|   10388 |      112.00 |
+|   10388 |     1048.00 |
+|   10389 |      396.80 |
+|   10389 |      288.00 |
+|   10389 |      788.00 |
+|   10389 |      360.00 |
+|   10390 |      600.00 |
+|   10390 |      576.00 |
+|   10390 |      432.00 |
+|   10390 |      667.20 |
+|   10391 |       86.40 |
+|   10392 |     1440.00 |
+|   10393 |      380.00 |
+|   10393 |      781.20 |
+|   10393 |       78.40 |
+|   10393 |     1743.00 |
+|   10393 |      320.00 |
+|   10394 |       48.00 |
+|   10394 |      394.00 |
+|   10395 |      268.80 |
+|   10395 |     1834.00 |
+|   10395 |      230.40 |
+|   10396 |      288.00 |
+|   10396 |     1032.00 |
+|   10396 |      583.80 |
+|   10397 |       80.00 |
+|   10397 |      763.20 |
+|   10398 |      432.00 |
+|   10398 |     2304.00 |
+|   10399 |      600.00 |
+|   10399 |      516.00 |
+|   10399 |      504.00 |
+|   10399 |      145.60 |
+|   10400 |     2079.00 |
+|   10400 |      504.00 |
+|   10400 |      480.00 |
+|   10401 |      372.60 |
+|   10401 |     2128.00 |
+|   10401 |      336.00 |
+|   10401 |     1032.00 |
+|   10402 |      432.00 |
+|   10402 |     2281.50 |
+|   10403 |      291.90 |
+|   10403 |      714.00 |
+|   10404 |      747.00 |
+|   10404 |      448.00 |
+|   10404 |      480.00 |
+|   10405 |      400.00 |
+|   10406 |      144.00 |
+|   10406 |      240.00 |
+|   10406 |     1528.80 |
+|   10406 |       76.00 |
+|   10406 |       29.40 |
+|   10407 |      504.00 |
+|   10407 |      432.00 |
+|   10407 |      258.00 |
+|   10408 |      208.00 |
+|   10408 |       35.40 |
+|   10408 |     1379.00 |
+|   10409 |      223.20 |
+|   10409 |       96.00 |
+|   10410 |       98.00 |
+|   10410 |      704.00 |
+|   10411 |      192.50 |
+|   10411 |      620.00 |
+|   10411 |      396.00 |
+|   10412 |      372.00 |
+|   10413 |      345.60 |
+|   10413 |     1576.00 |
+|   10413 |      201.60 |
+|   10414 |      131.40 |
+|   10414 |      100.00 |
+|   10415 |       62.40 |
+|   10415 |       40.00 |
+|   10416 |      146.00 |
+|   10416 |      262.00 |
+|   10416 |      312.00 |
+|   10417 |    10540.00 |
+|   10417 |       19.20 |
+|   10417 |      360.00 |
+|   10417 |      364.00 |
+|   10418 |      912.00 |
+|   10418 |      418.00 |
+|   10418 |      364.80 |
+|   10418 |      120.00 |
+|   10419 |     1632.00 |
+|   10419 |      576.00 |
+|   10420 |     1552.00 |
+|   10420 |        9.60 |
+|   10420 |       96.00 |
+|   10420 |      240.00 |
+|   10421 |       29.20 |
+|   10421 |      747.00 |
+|   10421 |      393.00 |
+|   10421 |      104.00 |
+|   10422 |       49.80 |
+|   10423 |      140.00 |
+|   10423 |      880.00 |
+|   10424 |      864.00 |
+|   10424 |    10329.20 |
+|   10424 |      300.00 |
+|   10425 |      192.00 |
+|   10425 |      288.00 |
+|   10426 |      152.00 |
+|   10426 |      186.20 |
+|   10427 |      651.00 |
+|   10428 |      192.00 |
+|   10429 |      520.00 |
+|   10429 |     1228.50 |
+|   10430 |     1404.00 |
+|   10430 |      400.00 |
+|   10430 |      912.00 |
+|   10430 |     3080.00 |
+|   10431 |     1560.00 |
+|   10431 |      735.00 |
+|   10431 |      228.00 |
+|   10432 |      249.00 |
+|   10432 |      236.00 |
+|   10433 |      851.20 |
+|   10434 |      100.80 |
+|   10434 |      259.20 |
+|   10435 |      152.00 |
+|   10435 |      201.60 |
+|   10435 |      278.00 |
+|   10436 |       48.00 |
+|   10436 |     1216.00 |
+|   10436 |      798.00 |
+|   10436 |      148.80 |
+|   10437 |      393.00 |
+|   10438 |      109.50 |
+|   10438 |      224.00 |
+|   10438 |      234.00 |
+|   10439 |      456.00 |
+|   10439 |      222.40 |
+|   10439 |      159.60 |
+|   10439 |      240.00 |
+|   10440 |      684.00 |
+|   10440 |      681.10 |
+|   10440 |     2376.00 |
+|   10440 |     2052.00 |
+|   10441 |     1755.00 |
+|   10442 |      504.00 |
+|   10442 |      472.00 |
+|   10442 |      816.00 |
+|   10443 |      100.80 |
+|   10443 |      436.80 |
+|   10444 |      312.00 |
+|   10444 |      373.50 |
+|   10444 |      115.20 |
+|   10444 |      231.00 |
+|   10445 |       86.40 |
+|   10445 |       88.50 |
+|   10446 |       87.60 |
+|   10446 |       72.00 |
+|   10446 |       30.00 |
+|   10446 |       84.00 |
+|   10447 |      292.00 |
+|   10447 |      588.00 |
+|   10447 |       34.40 |
+|   10448 |      149.40 |
+|   10448 |      294.00 |
+|   10449 |      347.20 |
+|   10449 |      112.00 |
+|   10449 |     1379.00 |
+|   10450 |      496.00 |
+|   10450 |       35.40 |
+|   10451 |     2304.00 |
+|   10451 |      931.00 |
+|   10451 |      470.40 |
+|   10451 |      572.00 |
+|   10452 |      546.00 |
+|   10452 |     1550.00 |
+|   10453 |      153.00 |
+|   10453 |      300.00 |
+|   10454 |      278.00 |
+|   10454 |       40.00 |
+|   10454 |       96.00 |
+|   10455 |      288.00 |
+|   10455 |     1310.00 |
+|   10455 |      570.00 |
+|   10455 |      516.00 |
+|   10456 |      320.00 |
+|   10456 |      336.00 |
+|   10457 |     1584.00 |
+|   10458 |      747.00 |
+|   10458 |     1092.00 |
+|   10458 |      736.00 |
+|   10458 |      456.00 |
+|   10458 |      860.00 |
+|   10459 |      384.00 |
+|   10459 |      192.00 |
+|   10459 |     1112.00 |
+|   10460 |      210.00 |
+|   10460 |       24.80 |
+|   10461 |      320.00 |
+|   10461 |      579.60 |
+|   10461 |     1152.00 |
+|   10462 |        4.80 |
+|   10462 |      151.20 |
+|   10463 |      153.30 |
+|   10463 |      560.00 |
+|   10464 |      281.60 |
+|   10464 |      110.40 |
+|   10464 |      912.00 |
+|   10464 |      544.00 |
+|   10465 |       90.00 |
+|   10465 |     1782.00 |
+|   10465 |      294.00 |
+|   10465 |      228.00 |
+|   10465 |      325.00 |
+|   10466 |      168.00 |
+|   10466 |       48.00 |
+|   10467 |      100.80 |
+|   10467 |      134.40 |
+|   10468 |      165.60 |
+|   10468 |      552.00 |
+|   10469 |      608.00 |
+|   10469 |      486.50 |
+|   10469 |       31.00 |
+|   10470 |     1500.00 |
+|   10470 |      108.00 |
+|   10470 |      212.80 |
+|   10471 |      720.00 |
+|   10471 |      608.00 |
+|   10472 |      288.00 |
+|   10472 |      763.20 |
+|   10473 |       24.00 |
+|   10473 |      206.40 |
+|   10474 |      223.20 |
+|   10474 |      655.20 |
+|   10474 |      308.70 |
+|   10474 |       62.00 |
+|   10475 |      350.00 |
+|   10475 |      816.00 |
+|   10475 |      604.80 |
+|   10476 |       38.40 |
+|   10476 |      144.00 |
+|   10477 |      216.00 |
+|   10477 |      168.00 |
+|   10477 |      288.00 |
+|   10478 |      496.00 |
+|   10479 |     6324.00 |
+|   10479 |      733.60 |
+|   10479 |     2640.00 |
+|   10479 |      798.00 |
+|   10480 |      228.00 |
+|   10480 |      528.00 |
+|   10481 |      384.00 |
+|   10481 |     1088.00 |
+|   10482 |      147.00 |
+|   10483 |      392.00 |
+|   10483 |      312.00 |
+|   10484 |      112.00 |
+|   10484 |      147.00 |
+|   10484 |      127.20 |
+|   10485 |      304.00 |
+|   10485 |      160.00 |
+|   10485 |      576.00 |
+|   10485 |      720.00 |
+|   10486 |       84.00 |
+|   10486 |     1060.00 |
+|   10486 |      128.00 |
+|   10487 |       36.50 |
+|   10487 |      747.00 |
+|   10487 |      141.60 |
+|   10488 |     1320.00 |
+|   10488 |      240.00 |
+|   10489 |      252.00 |
+|   10489 |      250.20 |
+|   10490 |     2640.00 |
+|   10490 |      300.00 |
+|   10490 |      223.20 |
+|   10491 |      232.50 |
+|   10491 |       72.80 |
+|   10492 |      672.00 |
+|   10492 |      224.00 |
+|   10493 |      252.00 |
+|   10493 |      136.00 |
+|   10493 |      288.00 |
+|   10494 |      912.00 |
+|   10495 |       72.00 |
+|   10495 |      154.00 |
+|   10495 |       52.00 |
+|   10496 |      200.00 |
+|   10497 |      425.60 |
+|   10497 |      695.00 |
+|   10497 |      260.00 |
+|   10498 |       63.00 |
+|   10498 |       92.00 |
+|   10498 |      420.00 |
+|   10499 |      912.00 |
+|   10499 |      500.00 |
+|   10500 |      186.00 |
+|   10500 |      364.80 |
+|   10501 |      149.00 |
+|   10502 |      199.50 |
+|   10502 |      196.80 |
+|   10502 |      420.00 |
+|   10503 |     1627.50 |
+|   10503 |      421.00 |
+|   10504 |      228.00 |
+|   10504 |      120.00 |
+|   10504 |      328.00 |
+|   10504 |      712.50 |
+|   10505 |      147.90 |
+|   10506 |      252.00 |
+|   10506 |      210.00 |
+|   10507 |      690.00 |
+|   10507 |      191.25 |
+|   10508 |       60.00 |
+|   10508 |      180.00 |
+|   10509 |      136.80 |
+|   10510 |     4456.44 |
+|   10510 |      279.00 |
+|   10511 |     1100.00 |
+|   10511 |     1500.00 |
+|   10511 |      400.00 |
+|   10512 |       45.00 |
+|   10512 |      108.00 |
+|   10512 |       57.00 |
+|   10512 |      408.00 |
+|   10513 |      400.00 |
+|   10513 |     1600.00 |
+|   10513 |      427.50 |
+|   10514 |     3159.00 |
+|   10514 |     1596.00 |
+|   10514 |     2660.00 |
+|   10514 |      820.95 |
+|   10514 |      387.50 |
+|   10515 |     1552.00 |
+|   10515 |      872.50 |
+|   10515 |     5268.00 |
+|   10515 |       40.00 |
+|   10515 |     2856.00 |
+|   10516 |     1562.50 |
+|   10516 |      772.00 |
+|   10516 |      280.00 |
+|   10517 |       42.00 |
+|   10517 |      220.00 |
+|   10517 |       90.00 |
+|   10518 |       22.50 |
+|   10518 |     3952.50 |
+|   10518 |      175.05 |
+|   10519 |      496.00 |
+|   10519 |     1520.00 |
+|   10519 |      340.00 |
+|   10520 |       36.00 |
+|   10520 |      164.00 |
+|   10521 |       54.00 |
+|   10521 |       96.50 |
+|   10521 |       75.00 |
+|   10522 |      720.00 |
+|   10522 |      960.00 |
+|   10522 |      517.80 |
+|   10522 |      460.00 |
+|   10523 |      975.00 |
+|   10523 |     1215.00 |
+|   10523 |      468.00 |
+|   10523 |       57.90 |
+|   10524 |       62.00 |
+|   10524 |      258.90 |
+|   10524 |     2760.00 |
+|   10524 |      111.75 |
+|   10525 |      570.00 |
+|   10525 |      276.00 |
+|   10526 |      144.00 |
+|   10526 |       60.00 |
+|   10526 |     1140.00 |
+|   10527 |     1100.00 |
+|   10527 |      570.00 |
+|   10528 |       63.00 |
+|   10528 |       20.00 |
+|   10528 |      313.20 |
+|   10529 |      336.00 |
+|   10529 |      250.00 |
+|   10529 |      360.00 |
+|   10530 |     1560.00 |
+|   10530 |     1150.00 |
+|   10530 |      570.00 |
+|   10530 |      900.00 |
+|   10531 |      110.00 |
+|   10532 |      388.35 |
+|   10532 |      408.00 |
+|   10533 |     1100.00 |
+|   10533 |      835.20 |
+|   10533 |      360.00 |
+|   10534 |      258.90 |
+|   10534 |      184.00 |
+|   10534 |       74.50 |
+|   10535 |     1050.00 |
+|   10535 |      184.00 |
+|   10535 |       97.50 |
+|   10535 |      825.00 |
+|   10536 |      570.00 |
+|   10536 |      250.00 |
+|   10536 |       75.00 |
+|   10536 |     1190.00 |
+|   10537 |      375.00 |
+|   10537 |      318.00 |
+|   10537 |      265.00 |
+|   10537 |      730.80 |
+|   10537 |      135.00 |
+|   10538 |      105.00 |
+|   10538 |       34.80 |
+|   10539 |       48.00 |
+|   10539 |      150.00 |
+|   10539 |       37.50 |
+|   10539 |      120.00 |
+|   10540 |      600.00 |
+|   10540 |     1249.20 |
+|   10540 |     7905.00 |
+|   10540 |      437.50 |
+|   10541 |      157.50 |
+|   10541 |     1054.00 |
+|   10541 |      757.80 |
+|   10541 |      193.50 |
+|   10542 |      315.00 |
+|   10542 |      178.80 |
+|   10543 |     1140.00 |
+|   10543 |      630.00 |
+|   10544 |      319.20 |
+|   10544 |       98.00 |
+|   10545 |      210.00 |
+|   10546 |      300.00 |
+|   10546 |      540.00 |
+|   10546 |     1972.00 |
+|   10547 |      768.00 |
+|   10547 |     1140.00 |
+|   10548 |      140.00 |
+|   10548 |      135.10 |
+|   10549 |      687.50 |
+|   10549 |      950.00 |
+|   10549 |     2544.00 |
+|   10550 |      312.00 |
+|   10550 |       92.00 |
+|   10550 |       60.00 |
+|   10550 |      285.00 |
+|   10551 |      698.00 |
+|   10551 |      360.00 |
+|   10551 |      778.00 |
+|   10552 |      648.00 |
+|   10552 |      232.50 |
+|   10553 |      315.00 |
+|   10553 |      244.30 |
+|   10553 |      504.00 |
+|   10553 |      375.00 |
+|   10553 |      108.00 |
+|   10554 |      523.50 |
+|   10554 |      180.00 |
+|   10554 |      986.00 |
+|   10554 |      130.00 |
+|   10555 |      697.50 |
+|   10555 |      322.00 |
+|   10555 |       81.00 |
+|   10555 |     1060.00 |
+|   10555 |     1520.00 |
+|   10556 |      835.20 |
+|   10557 |      997.50 |
+|   10557 |      155.00 |
+|   10558 |      237.50 |
+|   10558 |     1060.00 |
+|   10558 |      210.00 |
+|   10558 |      590.40 |
+|   10558 |       45.00 |
+|   10559 |      115.80 |
+|   10559 |      432.00 |
+|   10560 |      517.80 |
+|   10560 |      739.50 |
+|   10561 |      194.50 |
+|   10561 |     2650.00 |
+|   10562 |       50.00 |
+|   10562 |      493.00 |
+|   10563 |      475.00 |
+|   10563 |      490.00 |
+|   10564 |      624.00 |
+|   10564 |       75.00 |
+|   10564 |      600.00 |
+|   10565 |      112.50 |
+|   10565 |      598.50 |
+|   10566 |      735.00 |
+|   10566 |     1125.00 |
+|   10566 |      180.00 |
+|   10567 |      750.00 |
+|   10567 |      159.00 |
+|   10567 |     2200.00 |
+|   10568 |      155.00 |
+|   10569 |      437.50 |
+|   10569 |      540.00 |
+|   10570 |      315.00 |
+|   10570 |     2280.00 |
+|   10571 |      255.75 |
+|   10571 |      392.00 |
+|   10572 |      209.40 |
+|   10572 |      320.00 |
+|   10572 |      920.00 |
+|   10572 |      116.25 |
+|   10573 |      702.00 |
+|   10573 |      560.00 |
+|   10573 |      820.00 |
+|   10574 |       35.00 |
+|   10574 |       36.80 |
+|   10574 |      493.00 |
+|   10574 |      199.50 |
+|   10575 |      660.00 |
+|   10575 |      263.40 |
+|   10575 |     1044.00 |
+|   10575 |      180.00 |
+|   10576 |      180.00 |
+|   10576 |      250.00 |
+|   10576 |      408.45 |
+|   10577 |      180.00 |
+|   10577 |      155.00 |
+|   10577 |      234.00 |
+|   10578 |      360.00 |
+|   10578 |      117.00 |
+|   10579 |      155.00 |
+|   10579 |      162.75 |
+|   10580 |      348.75 |
+|   10580 |       86.85 |
+|   10580 |      631.50 |
+|   10581 |      387.50 |
+|   10582 |       78.00 |
+|   10582 |      252.00 |
+|   10583 |     1237.90 |
+|   10583 |      816.00 |
+|   10583 |      360.00 |
+|   10584 |      625.00 |
+|   10585 |      142.50 |
+|   10586 |       28.00 |
+|   10587 |      187.38 |
+|   10587 |      360.00 |
+|   10587 |      260.00 |
+|   10588 |     2500.00 |
+|   10588 |     1400.00 |
+|   10589 |       72.00 |
+|   10590 |      360.00 |
+|   10590 |      780.00 |
+|   10591 |      140.00 |
+|   10591 |      300.00 |
+|   10591 |      372.50 |
+|   10592 |      387.50 |
+|   10592 |      156.15 |
+|   10593 |     1701.00 |
+|   10593 |      720.00 |
+|   10593 |       72.00 |
+|   10594 |      168.00 |
+|   10594 |      397.50 |
+|   10595 |      540.00 |
+|   10595 |     3420.00 |
+|   10595 |     2340.00 |
+|   10596 |      190.00 |
+|   10596 |     1053.60 |
+|   10596 |      232.50 |
+|   10597 |      157.50 |
+|   10597 |      390.00 |
+|   10597 |      252.60 |
+|   10598 |     2195.00 |
+|   10598 |      193.50 |
+|   10599 |      493.00 |
+|   10600 |       29.80 |
+|   10600 |      450.00 |
+|   10601 |      360.00 |
+|   10601 |     1925.00 |
+|   10602 |       65.00 |
+|   10603 |     1008.00 |
+|   10603 |      500.00 |
+|   10604 |       76.50 |
+|   10604 |      180.00 |
+|   10605 |      523.50 |
+|   10605 |     1100.00 |
+|   10605 |     2380.00 |
+|   10605 |      322.50 |
+|   10606 |      440.00 |
+|   10606 |      480.00 |
+|   10606 |      493.00 |
+|   10607 |     1350.00 |
+|   10607 |     3900.00 |
+|   10607 |       35.00 |
+|   10607 |      772.80 |
+|   10607 |      417.60 |
+|   10608 |     1064.00 |
+|   10609 |       54.00 |
+|   10609 |      310.00 |
+|   10609 |       60.00 |
+|   10610 |      399.00 |
+|   10611 |      108.00 |
+|   10611 |      190.00 |
+|   10611 |      510.00 |
+|   10612 |     2170.00 |
+|   10612 |     1045.00 |
+|   10612 |      360.00 |
+|   10612 |     1360.00 |
+|   10612 |     1440.00 |
+|   10613 |       48.00 |
+|   10613 |      310.00 |
+|   10614 |      294.00 |
+|   10614 |       80.00 |
+|   10614 |       90.00 |
+|   10615 |      120.00 |
+|   10616 |     3952.50 |
+|   10616 |      532.00 |
+|   10616 |      225.00 |
+|   10616 |      322.50 |
+|   10617 |     1650.00 |
+|   10618 |     1750.00 |
+|   10618 |      760.00 |
+|   10618 |      187.50 |
+|   10619 |      420.00 |
+|   10619 |      840.00 |
+|   10620 |       22.50 |
+|   10620 |       35.00 |
+|   10621 |       46.00 |
+|   10621 |       90.00 |
+|   10621 |      300.00 |
+|   10621 |      322.50 |
+|   10622 |      380.00 |
+|   10622 |      225.00 |
+|   10623 |      488.25 |
+|   10623 |      138.00 |
+|   10623 |      250.00 |
+|   10623 |       13.50 |
+|   10623 |      540.00 |
+|   10624 |      456.00 |
+|   10624 |      742.74 |
+|   10624 |      194.50 |
+|   10625 |       69.75 |
+|   10625 |       70.00 |
+|   10625 |      340.00 |
+|   10626 |      393.60 |
+|   10626 |      680.00 |
+|   10626 |      430.00 |
+|   10627 |      739.50 |
+|   10627 |      525.00 |
+|   10628 |      450.00 |
+|   10629 |     2475.80 |
+|   10629 |      299.25 |
+|   10630 |      288.00 |
+|   10630 |      630.00 |
+|   10631 |       62.00 |
+|   10632 |      570.00 |
+|   10632 |       50.00 |
+|   10633 |     1368.00 |
+|   10633 |       78.00 |
+|   10633 |     1093.05 |
+|   10633 |     3944.00 |
+|   10634 |     1050.00 |
+|   10634 |     3125.00 |
+|   10634 |      795.00 |
+|   10634 |       15.50 |
+|   10635 |      220.00 |
+|   10635 |      320.25 |
+|   10635 |      840.00 |
+|   10636 |      550.00 |
+|   10636 |       79.50 |
+|   10637 |      210.00 |
+|   10637 |      406.25 |
+|   10637 |     2280.00 |
+|   10638 |      190.00 |
+|   10638 |      442.05 |
+|   10638 |     2088.00 |
+|   10639 |      500.00 |
+|   10640 |      720.00 |
+|   10640 |      225.00 |
+|   10641 |      950.00 |
+|   10641 |     1104.00 |
+|   10642 |      300.00 |
+|   10642 |      570.00 |
+|   10643 |      684.00 |
+|   10643 |      378.00 |
+|   10643 |       24.00 |
+|   10644 |      250.00 |
+|   10644 |      920.00 |
+|   10644 |      252.00 |
+|   10645 |     1250.00 |
+|   10645 |      285.00 |
+|   10646 |      270.00 |
+|   10646 |      558.00 |
+|   10646 |      645.00 |
+|   10646 |      455.00 |
+|   10647 |      276.00 |
+|   10647 |      360.00 |
+|   10648 |      315.00 |
+|   10648 |       67.50 |
+|   10649 |      912.00 |
+|   10649 |      522.00 |
+|   10650 |      776.70 |
+|   10650 |      820.00 |
+|   10650 |      223.50 |
+|   10651 |      110.40 |
+|   10651 |      420.00 |
+|   10652 |       51.78 |
+|   10652 |      280.00 |
+|   10653 |      523.50 |
+|   10653 |      680.00 |
+|   10654 |      264.00 |
+|   10654 |      360.00 |
+|   10654 |       44.70 |
+|   10655 |      193.00 |
+|   10656 |       69.75 |
+|   10656 |      544.60 |
+|   10656 |       57.00 |
+|   10657 |      775.00 |
+|   10657 |      231.60 |
+|   10657 |      540.00 |
+|   10657 |       95.00 |
+|   10657 |     1710.00 |
+|   10657 |     1020.00 |
+|   10658 |      600.00 |
+|   10658 |     1288.00 |
+|   10658 |     1870.00 |
+|   10658 |      910.00 |
+|   10659 |      250.00 |
+|   10659 |      441.60 |
+|   10659 |      600.00 |
+|   10660 |     1701.00 |
+|   10661 |       54.00 |
+|   10661 |      649.25 |
+|   10662 |      125.00 |
+|   10663 |      552.00 |
+|   10663 |      420.00 |
+|   10663 |     1060.00 |
+|   10664 |      744.00 |
+|   10664 |      456.00 |
+|   10664 |      315.75 |
+|   10665 |     1060.00 |
+|   10665 |       55.00 |
+|   10665 |      180.00 |
+|   10666 |     4456.44 |
+|   10666 |      210.50 |
+|   10667 |     1620.00 |
+|   10667 |      301.00 |
+|   10668 |      100.00 |
+|   10668 |       96.00 |
+|   10668 |      498.75 |
+|   10669 |      570.00 |
+|   10670 |      288.00 |
+|   10670 |      720.00 |
+|   10670 |      350.00 |
+|   10670 |      750.00 |
+|   10670 |      193.75 |
+|   10671 |      174.50 |
+|   10671 |      493.00 |
+|   10671 |      252.60 |
+|   10672 |     3952.50 |
+|   10672 |      258.00 |
+|   10673 |       52.35 |
+|   10673 |       84.00 |
+|   10673 |      276.00 |
+|   10674 |       45.00 |
+|   10675 |      697.50 |
+|   10675 |      328.00 |
+|   10675 |      397.50 |
+|   10676 |       62.00 |
+|   10676 |       64.40 |
+|   10676 |      408.45 |
+|   10677 |      936.90 |
+|   10677 |       20.00 |
+|   10678 |     3800.00 |
+|   10678 |       75.00 |
+|   10678 |     1158.00 |
+|   10678 |      223.50 |
+|   10679 |      660.00 |
+|   10680 |      872.50 |
+|   10680 |      250.00 |
+|   10680 |      560.00 |
+|   10681 |      276.00 |
+|   10681 |      120.00 |
+|   10681 |      931.00 |
+|   10682 |       75.00 |
+|   10682 |       68.00 |
+|   10682 |      232.50 |
+|   10683 |       63.00 |
+|   10684 |      368.00 |
+|   10684 |      380.00 |
+|   10684 |     1020.00 |
+|   10685 |      620.00 |
+|   10685 |       38.60 |
+|   10685 |      142.50 |
+|   10686 |     1170.00 |
+|   10686 |      468.45 |
+|   10687 |     4850.00 |
+|   10687 |     1237.90 |
+|   10687 |      114.00 |
+|   10688 |      558.00 |
+|   10688 |     2736.00 |
+|   10688 |      196.00 |
+|   10689 |      630.00 |
+|   10690 |      760.00 |
+|   10690 |      390.00 |
+|   10691 |      540.00 |
+|   10691 |     4951.60 |
+|   10691 |     1840.00 |
+|   10691 |      466.80 |
+|   10691 |     2366.40 |
+|   10692 |      878.00 |
+|   10693 |      582.00 |
+|   10693 |      447.00 |
+|   10693 |     1080.00 |
+|   10693 |      225.00 |
+|   10694 |     2700.00 |
+|   10694 |     1375.00 |
+|   10694 |      750.00 |
+|   10695 |      400.00 |
+|   10695 |      152.00 |
+|   10695 |       90.00 |
+|   10696 |      780.00 |
+|   10696 |      216.00 |
+|   10697 |       64.40 |
+|   10697 |      162.00 |
+|   10697 |      397.50 |
+|   10697 |      450.00 |
+|   10698 |      315.00 |
+|   10698 |      312.00 |
+|   10698 |     1485.48 |
+|   10698 |     1368.25 |
+|   10698 |      120.00 |
+|   10699 |      114.00 |
+|   10700 |       90.00 |
+|   10700 |      168.00 |
+|   10700 |      500.00 |
+|   10700 |     1290.00 |
+|   10701 |     2310.00 |
+|   10701 |      430.00 |
+|   10701 |      630.00 |
+|   10702 |       60.00 |
+|   10702 |      270.00 |
+|   10703 |       95.00 |
+|   10703 |     1925.00 |
+|   10703 |      525.00 |
+|   10704 |      132.00 |
+|   10704 |      157.50 |
+|   10704 |      306.00 |
+|   10705 |      250.00 |
+|   10705 |      128.00 |
+|   10706 |      349.00 |
+|   10706 |     1104.00 |
+|   10706 |      440.00 |
+|   10707 |      504.00 |
+|   10707 |      780.00 |
+|   10707 |      420.00 |
+|   10708 |       85.40 |
+|   10708 |       95.00 |
+|   10709 |     1600.00 |
+|   10709 |     1484.00 |
+|   10709 |      340.00 |
+|   10710 |       46.00 |
+|   10710 |       47.50 |
+|   10711 |      110.40 |
+|   10711 |      405.30 |
+|   10711 |     3936.00 |
+|   10712 |       98.40 |
+|   10712 |     1140.00 |
+|   10713 |      558.00 |
+|   10713 |      936.90 |
+|   10713 |     1045.00 |
+|   10713 |      288.00 |
+|   10714 |      570.00 |
+|   10714 |     1053.00 |
+|   10714 |      475.00 |
+|   10714 |      684.00 |
+|   10714 |      159.00 |
+|   10715 |      651.00 |
+|   10715 |      645.00 |
+|   10716 |       50.00 |
+|   10716 |      371.00 |
+|   10716 |      285.00 |
+|   10717 |      320.00 |
+|   10717 |      111.75 |
+|   10717 |      900.00 |
+|   10718 |     1368.00 |
+|   10718 |      349.00 |
+|   10718 |      760.00 |
+|   10718 |      986.00 |
+|   10719 |      750.00 |
+|   10719 |       77.67 |
+|   10719 |      298.00 |
+|   10720 |      378.00 |
+|   10720 |      172.00 |
+|   10721 |      972.50 |
+|   10722 |       57.00 |
+|   10722 |      625.00 |
+|   10722 |      562.50 |
+|   10722 |      325.50 |
+|   10723 |      468.45 |
+|   10724 |      496.00 |
+|   10724 |      142.50 |
+|   10725 |      115.80 |
+|   10725 |       28.00 |
+|   10725 |      144.00 |
+|   10726 |      550.00 |
+|   10726 |      105.00 |
+|   10727 |      780.00 |
+|   10727 |      380.00 |
+|   10727 |      550.00 |
+|   10728 |      388.35 |
+|   10728 |      110.40 |
+|   10728 |      288.00 |
+|   10728 |      510.00 |
+|   10729 |      900.00 |
+|   10729 |      300.00 |
+|   10729 |      650.00 |
+|   10730 |      261.75 |
+|   10730 |       37.50 |
+|   10730 |      210.50 |
+|   10731 |      400.00 |
+|   10731 |     1590.00 |
+|   10732 |      360.00 |
+|   10733 |      372.00 |
+|   10733 |      912.00 |
+|   10733 |      175.00 |
+|   10734 |      750.00 |
+|   10734 |      388.35 |
+|   10734 |      360.00 |
+|   10735 |      570.00 |
+|   10735 |       26.00 |
+|   10736 |      842.00 |
+|   10736 |      155.00 |
+|   10737 |       24.00 |
+|   10737 |      115.80 |
+|   10738 |       52.35 |
+|   10739 |      114.00 |
+|   10739 |      126.00 |
+|   10740 |      228.00 |
+|   10740 |      630.00 |
+|   10740 |      380.00 |
+|   10740 |      532.00 |
+|   10741 |      285.00 |
+|   10742 |      200.00 |
+|   10742 |     1700.00 |
+|   10742 |     1218.00 |
+|   10743 |      336.00 |
+|   10744 |      920.00 |
+|   10745 |     1500.00 |
+|   10745 |      311.20 |
+|   10745 |     2475.00 |
+|   10745 |      243.60 |
+|   10746 |       36.00 |
+|   10746 |      392.00 |
+|   10746 |      443.70 |
+|   10746 |     1440.00 |
+|   10747 |      100.00 |
+|   10747 |      337.75 |
+|   10747 |      395.10 |
+|   10747 |     1080.00 |
+|   10748 |      396.00 |
+|   10748 |      736.00 |
+|   10748 |     1064.00 |
+|   10749 |      570.00 |
+|   10749 |      330.00 |
+|   10749 |      180.00 |
+|   10750 |      116.25 |
+|   10750 |      380.00 |
+|   10750 |     1375.00 |
+|   10751 |      374.76 |
+|   10751 |      776.70 |
+|   10751 |      325.00 |
+|   10751 |      225.00 |
+|   10752 |      144.00 |
+|   10752 |      108.00 |
+|   10753 |       38.00 |
+|   10753 |       50.00 |
+|   10754 |       55.20 |
+|   10755 |      285.00 |
+|   10755 |     1140.00 |
+|   10755 |      273.00 |
+|   10755 |      900.00 |
+|   10756 |     1312.50 |
+|   10756 |      380.00 |
+|   10756 |       75.00 |
+|   10756 |      720.00 |
+|   10757 |      420.00 |
+|   10757 |      385.00 |
+|   10757 |     1479.00 |
+|   10757 |      798.00 |
+|   10758 |      624.60 |
+|   10758 |      420.00 |
+|   10758 |      600.00 |
+|   10759 |      320.00 |
+|   10760 |      168.00 |
+|   10760 |     1756.00 |
+|   10760 |     1380.00 |
+|   10761 |      490.00 |
+|   10761 |      139.50 |
+|   10762 |      288.00 |
+|   10762 |      285.00 |
+|   10762 |     1484.00 |
+|   10762 |     2280.00 |
+|   10763 |      400.00 |
+|   10763 |      126.00 |
+|   10763 |       90.00 |
+|   10764 |      200.00 |
+|   10764 |     2340.00 |
+|   10765 |     1684.00 |
+|   10766 |      760.00 |
+|   10766 |     1050.00 |
+|   10766 |      500.00 |
+|   10767 |       28.00 |
+|   10768 |       84.00 |
+|   10768 |      625.00 |
+|   10768 |      510.00 |
+|   10768 |      258.00 |
+|   10769 |      289.50 |
+|   10769 |      105.00 |
+|   10769 |      570.00 |
+|   10769 |      739.50 |
+|   10770 |      315.00 |
+|   10771 |      344.00 |
+|   10772 |     2228.22 |
+|   10772 |     1375.00 |
+|   10773 |     1287.00 |
+|   10773 |      875.00 |
+|   10773 |       54.25 |
+|   10774 |       25.00 |
+|   10774 |      850.00 |
+|   10775 |      186.00 |
+|   10775 |       42.00 |
+|   10776 |      200.00 |
+|   10776 |      168.00 |
+|   10776 |      256.50 |
+|   10776 |     6360.00 |
+|   10777 |      280.00 |
+|   10778 |       96.50 |
+|   10779 |      349.00 |
+|   10779 |      986.00 |
+|   10780 |      525.00 |
+|   10780 |      195.00 |
+|   10781 |       22.35 |
+|   10781 |      760.00 |
+|   10781 |      350.00 |
+|   10782 |       12.50 |
+|   10783 |      125.00 |
+|   10783 |     1317.50 |
+|   10784 |      570.00 |
+|   10784 |       36.00 |
+|   10784 |     1044.00 |
+|   10785 |      310.00 |
+|   10785 |       77.50 |
+|   10786 |     1200.00 |
+|   10786 |      388.35 |
+|   10786 |      325.50 |
+|   10787 |      285.00 |
+|   10787 |     2475.80 |
+|   10788 |      460.00 |
+|   10788 |      310.00 |
+|   10789 |     1875.00 |
+|   10789 |      270.00 |
+|   10789 |     1317.00 |
+|   10789 |      225.00 |
+|   10790 |       90.00 |
+|   10790 |      760.00 |
+|   10791 |     1733.06 |
+|   10791 |      193.00 |
+|   10792 |      190.00 |
+|   10792 |       22.35 |
+|   10792 |      187.50 |
+|   10793 |      135.10 |
+|   10793 |       56.00 |
+|   10794 |      348.75 |
+|   10794 |       44.70 |
+|   10795 |     1134.25 |
+|   10795 |     1365.00 |
+|   10796 |      655.83 |
+|   10796 |      194.50 |
+|   10796 |     1163.75 |
+|   10796 |      864.00 |
+|   10797 |      420.00 |
+|   10798 |       98.60 |
+|   10798 |      348.00 |
+|   10799 |      120.00 |
+|   10799 |       90.00 |
+|   10799 |     1375.00 |
+|   10800 |     1050.00 |
+|   10800 |      530.00 |
+|   10800 |       52.15 |
+|   10801 |     1560.00 |
+|   10801 |     2475.80 |
+|   10802 |      647.25 |
+|   10802 |     1590.00 |
+|   10802 |     1440.00 |
+|   10802 |      246.50 |
+|   10803 |      220.80 |
+|   10803 |      210.00 |
+|   10803 |      825.00 |
+|   10804 |     1116.00 |
+|   10804 |     1094.40 |
+|   10804 |       80.00 |
+|   10805 |      140.00 |
+|   10805 |     2635.00 |
+|   10806 |      380.00 |
+|   10806 |       42.10 |
+|   10806 |      150.00 |
+|   10807 |       18.40 |
+|   10808 |      760.00 |
+|   10808 |      900.00 |
+|   10809 |      140.00 |
+|   10810 |       42.00 |
+|   10810 |       70.00 |
+|   10810 |       75.00 |
+|   10811 |      138.00 |
+|   10811 |      162.00 |
+|   10811 |      552.00 |
+|   10812 |      200.00 |
+|   10812 |     1392.00 |
+|   10812 |      260.00 |
+|   10813 |      228.00 |
+|   10813 |      420.00 |
+|   10814 |      193.00 |
+|   10814 |      920.00 |
+|   10814 |      102.00 |
+|   10814 |      855.00 |
+|   10815 |       40.00 |
+|   10816 |     7905.00 |
+|   10816 |      986.00 |
+|   10817 |     1249.20 |
+|   10817 |     7905.00 |
+|   10817 |     1104.00 |
+|   10817 |     1232.50 |
+|   10818 |      640.00 |
+|   10818 |      193.00 |
+|   10819 |      322.00 |
+|   10819 |      155.00 |
+|   10820 |     1140.00 |
+|   10821 |      360.00 |
+|   10821 |      318.00 |
+|   10822 |      147.90 |
+|   10822 |       90.00 |
+|   10823 |      420.00 |
+|   10823 |      292.50 |
+|   10823 |     2200.00 |
+|   10823 |      195.00 |
+|   10824 |      115.80 |
+|   10824 |      135.00 |
+|   10825 |      374.76 |
+|   10825 |      656.00 |
+|   10826 |      437.50 |
+|   10826 |      292.50 |
+|   10827 |      465.00 |
+|   10827 |      378.00 |
+|   10828 |      405.00 |
+|   10828 |      527.00 |
+|   10829 |      190.00 |
+|   10829 |      800.00 |
+|   10829 |       60.00 |
+|   10829 |      714.00 |
+|   10830 |      150.00 |
+|   10830 |      504.00 |
+|   10830 |     1020.00 |
+|   10830 |      300.00 |
+|   10831 |       18.40 |
+|   10831 |      144.00 |
+|   10831 |     2108.00 |
+|   10831 |      414.00 |
+|   10832 |       18.00 |
+|   10832 |      140.00 |
+|   10832 |      311.20 |
+|   10832 |       99.75 |
+|   10833 |      600.00 |
+|   10833 |      112.50 |
+|   10833 |      295.20 |
+|   10834 |      990.32 |
+|   10834 |      517.80 |
+|   10835 |      825.00 |
+|   10835 |       26.00 |
+|   10836 |     1092.00 |
+|   10836 |      108.00 |
+|   10836 |      468.00 |
+|   10836 |     2040.00 |
+|   10836 |      997.50 |
+|   10837 |       36.00 |
+|   10837 |      460.00 |
+|   10837 |      380.00 |
+|   10837 |      378.00 |
+|   10838 |       72.00 |
+|   10838 |     1562.50 |
+|   10838 |      950.00 |
+|   10839 |      397.50 |
+|   10839 |      522.00 |
+|   10840 |       84.00 |
+|   10840 |      180.00 |
+|   10841 |      496.00 |
+|   10841 |     1140.00 |
+|   10841 |     2750.00 |
+|   10841 |      195.00 |
+|   10842 |      315.00 |
+|   10842 |      230.00 |
+|   10842 |      250.00 |
+|   10842 |      180.00 |
+|   10843 |      212.00 |
+|   10844 |      735.00 |
+|   10845 |      630.00 |
+|   10845 |      450.00 |
+|   10845 |      588.00 |
+|   10845 |      795.00 |
+|   10845 |     1596.00 |
+|   10846 |      462.00 |
+|   10846 |      450.00 |
+|   10846 |      200.00 |
+|   10847 |     1440.00 |
+|   10847 |      110.40 |
+|   10847 |     1560.00 |
+|   10847 |      342.00 |
+|   10847 |     1530.00 |
+|   10847 |     1182.50 |
+|   10848 |      640.50 |
+|   10848 |      291.00 |
+|   10849 |      490.00 |
+|   10849 |      562.14 |
+|   10850 |      280.00 |
+|   10850 |       10.00 |
+|   10850 |      450.00 |
+|   10851 |       95.00 |
+|   10851 |      140.00 |
+|   10851 |      195.00 |
+|   10851 |     2310.00 |
+|   10852 |      285.00 |
+|   10852 |      234.00 |
+|   10852 |     2465.00 |
+|   10853 |      625.00 |
+|   10854 |     3100.00 |
+|   10854 |      390.00 |
+|   10855 |      872.50 |
+|   10855 |      175.00 |
+|   10855 |      912.00 |
+|   10855 |      315.75 |
+|   10856 |      380.00 |
+|   10856 |      280.00 |
+|   10857 |      300.00 |
+|   10857 |     1093.05 |
+|   10857 |     1237.90 |
+|   10858 |      150.00 |
+|   10858 |      439.00 |
+|   10858 |       60.00 |
+|   10859 |      180.00 |
+|   10859 |      260.75 |
+|   10859 |      997.50 |
+|   10860 |      159.00 |
+|   10860 |      360.00 |
+|   10861 |     1638.00 |
+|   10861 |     1250.00 |
+|   10861 |      400.00 |
+|   10861 |       87.50 |
+|   10861 |      147.90 |
+|   10862 |      525.00 |
+|   10862 |       56.00 |
+|   10863 |      360.00 |
+|   10863 |      159.00 |
+|   10864 |       72.00 |
+|   10864 |      210.00 |
+|   10865 |    15810.00 |
+|   10865 |     1440.00 |
+|   10866 |      399.00 |
+|   10866 |       27.00 |
+|   10866 |     1035.60 |
+|   10867 |       98.40 |
+|   10868 |      624.60 |
+|   10868 |      540.00 |
+|   10868 |      840.00 |
+|   10869 |      720.00 |
+|   10869 |      210.00 |
+|   10869 |      450.00 |
+|   10869 |      250.00 |
+|   10870 |       54.00 |
+|   10870 |      106.00 |
+|   10871 |     1250.00 |
+|   10871 |      209.40 |
+|   10871 |      624.00 |
+|   10872 |      240.00 |
+|   10872 |      986.00 |
+|   10872 |      498.75 |
+|   10872 |      442.05 |
+|   10873 |      200.00 |
+|   10873 |      136.80 |
+|   10874 |      310.00 |
+|   10875 |      230.00 |
+|   10875 |      199.50 |
+|   10875 |      300.00 |
+|   10876 |      252.00 |
+|   10876 |      665.00 |
+|   10877 |      523.50 |
+|   10877 |     1562.50 |
+|   10878 |     1620.00 |
+|   10879 |      220.80 |
+|   10879 |      210.50 |
+|   10879 |      180.00 |
+|   10880 |      270.00 |
+|   10880 |      855.00 |
+|   10880 |      750.00 |
+|   10881 |      150.00 |
+|   10882 |      350.00 |
+|   10882 |      400.00 |
+|   10882 |      238.40 |
+|   10883 |       36.00 |
+|   10884 |      400.00 |
+|   10884 |      798.00 |
+|   10884 |      252.60 |
+|   10885 |      380.00 |
+|   10885 |       54.00 |
+|   10885 |      450.00 |
+|   10885 |      325.00 |
+|   10886 |     2170.00 |
+|   10886 |      437.50 |
+|   10886 |      520.00 |
+|   10887 |       70.00 |
+|   10888 |      380.00 |
+|   10888 |      225.00 |
+|   10889 |      840.00 |
+|   10889 |    10540.00 |
+|   10890 |      585.00 |
+|   10890 |      140.00 |
+|   10890 |      135.10 |
+|   10891 |      388.35 |
+|   10892 |     2200.00 |
+|   10893 |     1200.00 |
+|   10893 |       45.00 |
+|   10893 |     2970.96 |
+|   10893 |      906.15 |
+|   10893 |      380.00 |
+|   10894 |      168.00 |
+|   10894 |     1800.00 |
+|   10894 |      930.00 |
+|   10895 |      495.00 |
+|   10895 |      810.00 |
+|   10895 |     1674.40 |
+|   10895 |     3400.00 |
+|   10896 |      142.50 |
+|   10896 |      608.00 |
+|   10897 |     9903.20 |
+|   10897 |      932.04 |
+|   10898 |       30.00 |
+|   10899 |      144.00 |
+|   10900 |       45.00 |
+|   10901 |      289.50 |
+|   10901 |      645.00 |
+|   10902 |      720.00 |
+|   10902 |      295.80 |
+|   10903 |      240.00 |
+|   10903 |      442.05 |
+|   10903 |      250.00 |
+|   10904 |      198.75 |
+|   10904 |     1725.50 |
+|   10905 |      360.00 |
+|   10906 |      427.50 |
+|   10907 |      108.50 |
+|   10908 |      600.00 |
+|   10908 |       98.00 |
+|   10909 |      360.00 |
+|   10909 |      261.75 |
+|   10909 |       48.25 |
+|   10910 |      110.40 |
+|   10910 |      200.00 |
+|   10910 |      142.50 |
+|   10911 |      180.00 |
+|   10911 |      468.00 |
+|   10911 |      210.00 |
+|   10912 |      840.00 |
+|   10912 |     7427.40 |
+|   10913 |      660.00 |
+|   10913 |      100.00 |
+|   10913 |      198.75 |
+|   10914 |      537.50 |
+|   10915 |      390.00 |
+|   10915 |       75.00 |
+|   10915 |       74.50 |
+|   10916 |      104.70 |
+|   10916 |      192.00 |
+|   10916 |      390.00 |
+|   10917 |       25.89 |
+|   10917 |      340.00 |
+|   10918 |     1080.00 |
+|   10918 |      850.00 |
+|   10919 |      418.80 |
+|   10919 |      336.00 |
+|   10919 |      368.00 |
+|   10920 |      390.00 |
+|   10921 |      180.00 |
+|   10921 |     1756.00 |
+|   10922 |      585.00 |
+|   10922 |      157.50 |
+|   10923 |      140.00 |
+|   10923 |      460.00 |
+|   10923 |      336.00 |
+|   10924 |      620.00 |
+|   10924 |     1368.00 |
+|   10924 |       46.50 |
+|   10925 |      475.00 |
+|   10925 |       84.00 |
+|   10926 |       42.00 |
+|   10926 |       60.00 |
+|   10926 |       64.40 |
+|   10926 |      348.00 |
+|   10927 |      405.00 |
+|   10927 |       35.00 |
+|   10927 |      360.00 |
+|   10928 |       47.50 |
+|   10928 |       90.00 |
+|   10929 |      600.00 |
+|   10929 |      379.75 |
+|   10929 |      195.00 |
+|   10930 |      360.00 |
+|   10930 |     1097.50 |
+|   10930 |      600.00 |
+|   10930 |      397.50 |
+|   10931 |      252.00 |
+|   10931 |      585.00 |
+|   10932 |      523.50 |
+|   10932 |      690.20 |
+|   10932 |      556.80 |
+|   10932 |      155.00 |
+|   10933 |       65.60 |
+|   10933 |      855.00 |
+|   10934 |      500.00 |
+|   10935 |      378.00 |
+|   10935 |      250.00 |
+|   10935 |       72.00 |
+|   10936 |      570.00 |
+|   10937 |      364.80 |
+|   10937 |      280.00 |
+|   10938 |      120.00 |
+|   10938 |     1104.00 |
+|   10938 |     1666.00 |
+|   10938 |      752.50 |
+|   10939 |      190.00 |
+|   10939 |      560.00 |
+|   10940 |      240.00 |
+|   10940 |      120.00 |
+|   10941 |      550.00 |
+|   10941 |     1479.00 |
+|   10941 |     1000.00 |
+|   10941 |     1740.00 |
+|   10942 |      560.00 |
+|   10943 |       90.00 |
+|   10943 |      441.00 |
+|   10943 |      180.00 |
+|   10944 |      105.00 |
+|   10944 |      350.10 |
+|   10944 |      684.00 |
+|   10945 |      120.00 |
+|   10945 |      125.00 |
+|   10946 |      775.00 |
+|   10946 |      112.50 |
+|   10946 |      520.00 |
+|   10947 |      220.00 |
+|   10948 |      146.25 |
+|   10948 |     2120.00 |
+|   10948 |       96.00 |
+|   10949 |      300.00 |
+|   10949 |      930.00 |
+|   10949 |      234.00 |
+|   10949 |     2958.00 |
+|   10950 |      110.00 |
+|   10951 |       37.50 |
+|   10951 |       57.90 |
+|   10951 |      387.50 |
+|   10952 |      400.00 |
+|   10952 |       91.20 |
+|   10953 |     4050.00 |
+|   10953 |      625.00 |
+|   10954 |      488.60 |
+|   10954 |      312.50 |
+|   10954 |      285.00 |
+|   10954 |      816.00 |
+|   10955 |       93.00 |
+|   10956 |      120.00 |
+|   10956 |      133.00 |
+|   10956 |      424.00 |
+|   10957 |      776.70 |
+|   10957 |      720.00 |
+|   10957 |      266.00 |
+|   10958 |      427.00 |
+|   10958 |      180.00 |
+|   10958 |      174.00 |
+|   10959 |      155.00 |
+|   10960 |       45.00 |
+|   10960 |      231.60 |
+|   10961 |       42.00 |
+|   10961 |     1080.00 |
+|   10962 |     1350.00 |
+|   10962 |      462.00 |
+|   10962 |      656.00 |
+|   10962 |      324.00 |
+|   10962 |      792.00 |
+|   10963 |       68.00 |
+|   10964 |      375.00 |
+|   10964 |     1317.50 |
+|   10964 |      360.00 |
+|   10965 |      848.00 |
+|   10966 |      208.00 |
+|   10966 |      456.00 |
+|   10966 |      591.60 |
+|   10967 |      110.40 |
+|   10967 |      800.00 |
+|   10968 |     1140.00 |
+|   10968 |      135.00 |
+|   10968 |      133.00 |
+|   10969 |      108.00 |
+|   10970 |      280.00 |
+|   10971 |     1733.06 |
+|   10972 |      234.00 |
+|   10972 |       17.50 |
+|   10973 |      156.15 |
+|   10973 |       57.90 |
+|   10973 |       77.50 |
+|   10974 |      439.00 |
+|   10975 |      640.00 |
+|   10975 |       77.50 |
+|   10976 |      912.00 |
+|   10977 |      540.00 |
+|   10977 |      285.00 |
+|   10977 |      530.00 |
+|   10977 |      878.00 |
+|   10978 |      800.00 |
+|   10978 |      400.00 |
+|   10978 |      184.00 |
+|   10978 |      116.70 |
+|   10979 |      540.00 |
+|   10979 |      760.00 |
+|   10979 |      360.00 |
+|   10979 |     1317.00 |
+|   10979 |      300.00 |
+|   10979 |     1536.50 |
+|   10980 |      310.00 |
+|   10981 |    15810.00 |
+|   10982 |      600.00 |
+|   10982 |      414.00 |
+|   10983 |      504.00 |
+|   10983 |      292.50 |
+|   10984 |      959.75 |
+|   10984 |       90.00 |
+|   10984 |      760.00 |
+|   10985 |      628.20 |
+|   10985 |      500.00 |
+|   10985 |     1120.00 |
+|   10986 |      630.00 |
+|   10986 |     1215.00 |
+|   10986 |      180.00 |
+|   10986 |      195.00 |
+|   10987 |     1800.00 |
+|   10987 |      276.00 |
+|   10987 |      696.00 |
+|   10988 |     1800.00 |
+|   10988 |     1972.00 |
+|   10989 |     1000.00 |
+|   10989 |      315.00 |
+|   10989 |       38.60 |
+|   10990 |      650.00 |
+|   10990 |      840.00 |
+|   10990 |     1560.00 |
+|   10990 |     1881.00 |
+|   10991 |      950.00 |
+|   10991 |      300.00 |
+|   10991 |     1620.00 |
+|   10992 |       69.60 |
+|   10993 |     6189.50 |
+|   10993 |      337.75 |
+|   10994 |      990.00 |
+|   10995 |     1060.00 |
+|   10995 |      136.00 |
+|   10996 |      560.00 |
+|   10997 |     1600.00 |
+|   10997 |      240.00 |
+|   10997 |      140.00 |
+|   10998 |       54.00 |
+|   10998 |      199.50 |
+|   10998 |      200.00 |
+|   10998 |      232.50 |
+|   10999 |      193.00 |
+|   10999 |      795.00 |
+|   10999 |      273.00 |
+|   11000 |      550.00 |
+|   11000 |      135.00 |
+|   11000 |      390.00 |
+|   11001 |     1800.00 |
+|   11001 |      525.00 |
+|   11001 |      300.00 |
+|   11001 |      144.00 |
+|   11002 |      336.00 |
+|   11002 |      270.00 |
+|   11002 |      336.00 |
+|   11002 |      960.00 |
+|   11003 |       72.00 |
+|   11003 |      184.00 |
+|   11003 |       70.00 |
+|   11004 |      187.38 |
+|   11004 |      108.00 |
+|   11005 |       36.00 |
+|   11005 |      550.00 |
+|   11006 |      144.00 |
+|   11006 |      247.58 |
+|   11007 |     1200.00 |
+|   11007 |     1237.90 |
+|   11007 |      196.00 |
+|   11008 |     3192.00 |
+|   11008 |     1260.00 |
+|   11008 |      451.50 |
+|   11009 |       54.00 |
+|   11009 |      342.00 |
+|   11009 |      306.00 |
+|   11010 |      600.00 |
+|   11010 |       45.00 |
+|   11011 |      530.00 |
+|   11011 |      430.00 |
+|   11012 |      460.00 |
+|   11012 |     1224.00 |
+|   11012 |     1290.00 |
+|   11013 |       90.00 |
+|   11013 |       56.00 |
+|   11013 |      190.00 |
+|   11013 |       25.00 |
+|   11014 |      270.20 |
+|   11015 |      388.35 |
+|   11015 |      234.00 |
+|   11016 |      187.50 |
+|   11016 |      304.00 |
+|   11017 |      250.00 |
+|   11017 |     6050.00 |
+|   11017 |      450.00 |
+|   11018 |      760.00 |
+|   11018 |      625.00 |
+|   11018 |      190.00 |
+|   11019 |       36.00 |
+|   11019 |       40.00 |
+|   11020 |      744.00 |
+|   11021 |      209.00 |
+|   11021 |     1215.00 |
+|   11021 |     1967.49 |
+|   11021 |     2332.00 |
+|   11021 |     1218.00 |
+|   11022 |      322.00 |
+|   11022 |     1080.00 |
+|   11023 |      120.00 |
+|   11023 |     1380.00 |
+|   11024 |      374.76 |
+|   11024 |       75.00 |
+|   11024 |      442.05 |
+|   11024 |     1075.00 |
+|   11025 |      180.00 |
+|   11025 |      120.00 |
+|   11026 |      500.00 |
+|   11026 |      530.00 |
+|   11027 |      135.00 |
+|   11027 |     1035.30 |
+|   11028 |      840.00 |
+|   11028 |     1320.00 |
+|   11029 |      760.00 |
+|   11029 |      526.80 |
+|   11030 |     1900.00 |
+|   11030 |     1494.50 |
+|   11030 |     7427.40 |
+|   11030 |     5500.00 |
+|   11031 |      810.00 |
+|   11031 |      480.00 |
+|   11031 |       94.50 |
+|   11031 |      665.00 |
+|   11031 |      344.00 |
+|   11032 |      665.00 |
+|   11032 |     6587.50 |
+|   11032 |     1650.00 |
+|   11033 |     2296.00 |
+|   11033 |     1296.00 |
+|   11034 |      150.00 |
+|   11034 |      233.40 |
+|   11034 |      171.00 |
+|   11035 |      180.00 |
+|   11035 |     1080.00 |
+|   11035 |      420.00 |
+|   11035 |       74.50 |
+|   11036 |       42.00 |
+|   11036 |     1650.00 |
+|   11037 |       60.00 |
+|   11038 |       92.00 |
+|   11038 |       14.00 |
+|   11038 |      645.00 |
+|   11039 |      912.00 |
+|   11039 |      432.00 |
+|   11039 |     1200.00 |
+|   11039 |      546.00 |
+|   11040 |      200.00 |
+|   11041 |      570.00 |
+|   11041 |     1317.00 |
+|   11042 |      291.75 |
+|   11042 |      114.00 |
+|   11043 |      210.00 |
+|   11044 |      591.60 |
+|   11045 |       37.50 |
+|   11045 |     1272.00 |
+|   11046 |      760.00 |
+|   11046 |      480.00 |
+|   11046 |      324.00 |
+|   11047 |      450.00 |
+|   11047 |      640.50 |
+|   11048 |      525.00 |
+|   11049 |      190.00 |
+|   11049 |      152.00 |
+|   11050 |      900.00 |
+|   11051 |       45.00 |
+|   11052 |     1380.00 |
+|   11052 |      285.00 |
+|   11053 |     2187.50 |
+|   11053 |      640.00 |
+|   11053 |      831.25 |
+|   11054 |       25.00 |
+|   11054 |      280.00 |
+|   11055 |       67.50 |
+|   11055 |      210.00 |
+|   11055 |     1060.00 |
+|   11055 |      390.00 |
+|   11056 |     1200.00 |
+|   11056 |      840.00 |
+|   11056 |     1700.00 |
+|   11057 |       45.00 |
+|   11058 |       30.00 |
+|   11058 |      714.00 |
+|   11058 |      114.00 |
+|   11059 |      180.00 |
+|   11059 |      468.00 |
+|   11059 |     1190.00 |
+|   11060 |      136.00 |
+|   11060 |      130.00 |
+|   11061 |      510.00 |
+|   11062 |      328.00 |
+|   11062 |      180.00 |
+|   11063 |      420.00 |
+|   11063 |      736.00 |
+|   11063 |      289.50 |
+|   11064 |     3003.00 |
+|   11064 |      115.80 |
+|   11064 |      820.00 |
+|   11064 |       96.00 |
+|   11064 |      687.50 |
+|   11065 |      103.56 |
+|   11065 |      149.00 |
+|   11066 |       52.35 |
+|   11066 |      386.40 |
+|   11066 |      490.00 |
+|   11067 |       86.85 |
+|   11068 |      364.80 |
+|   11068 |     1656.00 |
+|   11068 |      364.00 |
+|   11069 |      360.00 |
+|   11070 |      720.00 |
+|   11070 |      380.00 |
+|   11070 |      523.50 |
+|   11070 |      250.00 |
+|   11071 |      450.00 |
+|   11071 |       60.00 |
+|   11072 |      152.00 |
+|   11072 |      386.00 |
+|   11072 |      357.50 |
+|   11072 |     4322.50 |
+|   11073 |      210.00 |
+|   11073 |       90.00 |
+|   11074 |      244.30 |
+|   11075 |      190.00 |
+|   11075 |      360.00 |
+|   11075 |       36.00 |
+|   11076 |      500.00 |
+|   11076 |      465.00 |
+|   11076 |       92.00 |
+|   11077 |      456.00 |
+|   11077 |       40.00 |
+|   11077 |       22.00 |
+|   11077 |       25.00 |
+|   11077 |       30.00 |
+|   11077 |       80.00 |
+|   11077 |       31.00 |
+|   11077 |       76.00 |
+|   11077 |       24.00 |
+|   11077 |       23.25 |
+|   11077 |       34.90 |
+|   11077 |       81.00 |
+|   11077 |       18.00 |
+|   11077 |       32.00 |
+|   11077 |       36.00 |
+|   11077 |       28.95 |
+|   11077 |       36.00 |
+|   11077 |       14.00 |
+|   11077 |       48.00 |
+|   11077 |       68.00 |
+|   11077 |       66.50 |
+|   11077 |       17.00 |
+|   11077 |       30.00 |
+|   11077 |       31.00 |
+|   11077 |       26.00 |
++---------+-------------+
+2155 rows in set (0.03 sec)
+
+mysql> 
+
+
+#
+#
+QUestion#6
+#
+#
+
+mysql> select emp.employeeid,emp.firstname,emp.lastname,sum(odrd.unitprice) from `Order Details` odrd,Orders odr,Employees emp where emp.employeeid=odr.employeeid and odr.orderid=odrd.orderid group by emp.employeeid;
++------------+-----------+-----------+---------------------+
+| employeeid | firstname | lastname  | sum(odrd.unitprice) |
++------------+-----------+-----------+---------------------+
+|          1 | Nancy     | Davolio   |           8732.4400 |
+|          2 | Andrew    | Fuller    |           6913.4100 |
+|          3 | Janet     | Leverling |           8748.4200 |
+|          4 | Margaret  | Peacock   |          11187.2900 |
+|          5 | Steven    | Buchanan  |           2747.4300 |
+|          6 | Michael   | Suyama    |           3834.9600 |
+|          7 | Robert    | King      |           4717.5100 |
+|          8 | Laura     | Callahan  |           6239.2500 |
+|          9 | Anne      | Dodsworth |           3380.2000 |
++------------+-----------+-----------+---------------------+
+9 rows in set (0.07 sec)
+
+mysql> 
+
+
+#
+#
+QUestion#7
+#
+#
+
+
+
+mysql> SELECT productID,ProductName from Products prd,Categories cat,Suppliers sup where sup.supplierID=prd.supplierID and prd.categoryID=cat.categoryID order by productname;
++-----------+----------------------------------+
+| productID | ProductName                      |
++-----------+----------------------------------+
+|        17 | Alice Mutton                     |
+|         3 | Aniseed Syrup                    |
+|        40 | Boston Crab Meat                 |
+|        60 | Camembert Pierrot                |
+|        18 | Carnarvon Tigers                 |
+|         1 | Chai                             |
+|         2 | Chang                            |
+|        39 | Chartreuse verte                 |
+|         4 | Chef Anton's Cajun Seasoning     |
+|         5 | Chef Anton's Gumbo Mix           |
+|        48 | Chocolade                        |
+|        38 | Cte de Blaye                     |
+|        58 | Escargots de Bourgogne           |
+|        52 | Filo Mix                         |
+|        71 | Flotemysost                      |
+|        33 | Geitost                          |
+|        15 | Genen Shouyu                     |
+|        56 | Gnocchi di nonna Alice           |
+|        31 | Gorgonzola Telino                |
+|         6 | Grandma's Boysenberry Spread     |
+|        37 | Gravad lax                       |
+|        24 | Guaran Fantstica                 |
+|        69 | Gudbrandsdalsost                 |
+|        44 | Gula Malacca                     |
+|        26 | Gumbr Gummibrchen                |
+|        22 | Gustaf's Knckebrd                |
+|        10 | Ikura                            |
+|        36 | Inlagd Sill                      |
+|        43 | Ipoh Coffee                      |
+|        41 | Jack's New England Clam Chowder  |
+|        13 | Konbu                            |
+|        76 | Lakkalikri                       |
+|        67 | Laughing Lumberjack Lager        |
+|        74 | Longlife Tofu                    |
+|        65 | Louisiana Fiery Hot Pepper Sauce |
+|        66 | Louisiana Hot Spiced Okra        |
+|        51 | Manjimup Dried Apples            |
+|        32 | Mascarpone Fabioli               |
+|        49 | Maxilaku                         |
+|         9 | Mishi Kobe Niku                  |
+|        72 | Mozzarella di Giovanni           |
+|        30 | Nord-Ost Matjeshering            |
+|         8 | Northwoods Cranberry Sauce       |
+|        25 | NuNuCa Nu-Nougat-Creme           |
+|        77 | Original Frankfurter grne Soe    |
+|        70 | Outback Lager                    |
+|        16 | Pavlova                          |
+|        53 | Perth Pasties                    |
+|        55 | Pt chinois                       |
+|        11 | Queso Cabrales                   |
+|        12 | Queso Manchego La Pastora        |
+|        59 | Raclette Courdavault             |
+|        57 | Ravioli Angelo                   |
+|        73 | Rd Kaviar                        |
+|        75 | Rhnbru Klosterbier               |
+|        45 | Rogede sild                      |
+|        28 | Rssle Sauerkraut                 |
+|        34 | Sasquatch Ale                    |
+|        27 | Schoggi Schokolade               |
+|        68 | Scottish Longbreads              |
+|        42 | Singaporean Hokkien Fried Mee    |
+|        20 | Sir Rodney's Marmalade           |
+|        21 | Sir Rodney's Scones              |
+|        61 | Sirop d'rable                    |
+|        46 | Spegesild                        |
+|        35 | Steeleye Stout                   |
+|        62 | Tarte au sucre                   |
+|        19 | Teatime Chocolate Biscuits       |
+|        29 | Thringer Rostbratwurst           |
+|        14 | Tofu                             |
+|        54 | Tourtire                         |
+|        23 | Tunnbrd                          |
+|         7 | Uncle Bob's Organic Dried Pears  |
+|        50 | Valkoinen suklaa                 |
+|        63 | Vegie-spread                     |
+|        64 | Wimmers gute Semmelkndel         |
+|        47 | Zaanse koeken                    |
++-----------+----------------------------------+
+77 rows in set (0.00 sec)
+
+mysql> 
+
+
+
+
+
+#
+#
+QUestion
+#
+#
+
+mysql> select count(productid), categoryname from Products prd inner join Categories cat ON prd.categoryid=cat.categoryid group by cat.categoryid;
++------------------+----------------+
+| count(productid) | categoryname   |
++------------------+----------------+
+|               12 | Beverages      |
+|               12 | Condiments     |
+|               13 | Confections    |
+|               10 | Dairy Products |
+|                7 | Grains/Cereals |
+|                6 | Meat/Poultry   |
+|                5 | Produce        |
+|               12 | Seafood        |
++------------------+----------------+
+8 rows in set (0.00 sec)
+
+mysql> 
+

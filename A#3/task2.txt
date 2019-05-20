@@ -1,0 +1,286 @@
+Microsoft Windows [Version 10.0.17134.648]
+(c) 2018 Microsoft Corporation. All rights reserved.
+
+C:\Users\iqra fakhar>cd ..
+
+C:\Users>cd ..
+
+C:\>cd xampp
+
+C:\xampp>cd mysql
+
+C:\xampp\mysql>cd bin
+
+C:\xampp\mysql\bin>mysql -u root
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 6
+Server version: 10.1.30-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2017, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> create database Q2;
+Query OK, 1 row affected (0.00 sec)
+
+MariaDB [(none)]> use Q2;
+Database changed
+MariaDB [Q2]>  create table data(
+    -> emp_id int(10) primary key,
+    -> first_name varchar(20) not null,
+    -> last_name varchar(20) not null,
+    -> email varchar(30) not null,
+    -> hire_date date not null,
+    -> job_id varchar(20) not null,
+    -> salary int(40) not null,
+    -> manager_id int(10) not null,
+    -> dept_id int(10) not null);
+Query OK, 0 rows affected (0.26 sec)
+
+MariaDB [Q2]> insert into data
+    -> values (100,'steven','king','sking',str_to_date('17,jun,87','%d,%b,%y'),'AD_PRES',24000,0,90);
+Query OK, 1 row affected (0.06 sec)
+
+MariaDB [Q2]> insert into data
+    -> values (101,'Neena','kochhar','Nkochhar',str_to_date('18,jun,87','%d,%b,%y'),'AD_VP',17000,100,90);
+Query OK, 1 row affected (0.07 sec)
+
+MariaDB [Q2]> insert into data
+    -> values (102,'Lex','De Haan','LDEHAAN',str_to_date('19,jun,87','%d,%b,%y'),'AD_VP',17000,100,90);
+Query OK, 1 row affected (0.06 sec)
+
+MariaDB [Q2]> insert into data
+    -> values (103,'Alexander','Hunold','AHUNOLD',str_to_date('20,jun,87','%d,%b,%y'),'IT_PROG',9000,102,60);
+Query OK, 1 row affected (0.07 sec)
+
+MariaDB [Q2]> insert into data
+    -> values (104,'Bruce','Ernst','BERNST',str_to_date('21,jun,87','%d,%b,%y'), 'IT_PROG',6000,103,60);
+Query OK, 1 row affected (0.06 sec)
+
+MariaDB [Q2]> insert into data
+    -> values (105,'David','Austin','DAUSTIN',str_to_date('22,jun,87','%d,%b,%y'), 'IT_PROG',4800,103,60);
+Query OK, 1 row affected (0.07 sec)
+
+MariaDB [Q2]> insert into data
+    -> values (106,'Valli','Pataballa','VPATABAL',str_to_date('23,jun,87','%d,%b,%y'), 'IT_PROG',4800,103,60);
+Query OK, 1 row affected (0.07 sec)
+
+MariaDB [Q2]> insert into data
+    -> values (107,'Diana','Lorentz','DLORENTZ',str_to_date('24,jun,87','%d,%b,%y'), 'IT_PROG',4200,103,60);
+Query OK, 1 row affected (0.06 sec)
+
+MariaDB [Q2]> insert into data
+    -> values (108,'Nancy','Greenberg','NGREENBE',str_to_date('25,jun,87','%d,%b,%y'),'FI_MGR',12000,101,100);
+Query OK, 1 row affected (0.07 sec)
+
+MariaDB [Q2]> insert into data
+    -> values (109,'Daniel','Faviet','DFAVIET',str_to_date('26,jun,87','%d,%b,%y'),'FI_ACCOUNT ',9000,108,100);
+Query OK, 1 row affected (0.06 sec)
+
+MariaDB [Q2]> insert into data
+    -> values (110,'John','Chen','JCHEN',str_to_date('27,jun,87','%d,%b,%y'),'FI_ACCOUNT ',8200,108,100);
+Query OK, 1 row affected (0.06 sec)
+
+MariaDB [Q2]> insert into data
+    -> values (111,'Ismael','Sciarra','ISCIARRA',str_to_date('28,jun,87','%d,%b,%y'),'FI_ACCOUNT ',7700,108,100);
+Query OK, 1 row affected (0.05 sec)
+
+MariaDB [Q2]> insert into data
+    -> values (112,'JoseManue','Urman','JMURMAN',str_to_date('29,jun,87','%d,%b,%y'),'FI_ACCOUNT',7800,108,100);
+Query OK, 1 row affected (0.06 sec)
+
+MariaDB [Q2]> insert into data
+    -> values (113,'Luis','Popp','LPOPP',str_to_date('30,jun,87','%d,%b,%y'),'FI_ACCOUNT ',6900,108,100);
+Query OK, 1 row affected (0.05 sec)
+
+MariaDB [Q2]> insert into data
+    -> values (114,'Den','Raphaely','DRAPHEAL',str_to_date('01,jul,87','%d,%b,%y'),'PU_MAN',11000,100,30);
+Query OK, 1 row affected (0.05 sec)
+
+MariaDB [Q2]> insert into data
+    -> values (115,'Alexander','Khoo','AKHOO',str_to_date('02,jul,87','%d,%b,%y'),'PU_CLERK',3100,114,30);
+Query OK, 1 row affected (0.05 sec)
+
+MariaDB [Q2]> insert into data
+    -> values (116,'Shelli','Baida','SBAIDA',str_to_date('03,jul,87','%d,%b,%y'),'PU_CLERK ',2900,114,30);
+Query OK, 1 row affected (0.07 sec)
+
+MariaDB [Q2]> insert into data
+    -> values (117,'Sigal','Tobias','STOBIAS',str_to_date('04,jul,87','%d,%b,%y'),'PU_CLERK ',2800,114,30);
+Query OK, 1 row affected (0.06 sec)
+
+MariaDB [Q2]> insert into data
+    -> values (118,'Guy','Himuro','GHIMURO',str_to_date('05,jul,87','%d,%b,%y'),'PU_CLERK ',2600,114,30);
+Query OK, 1 row affected (0.04 sec)
+
+MariaDB [Q2]> insert into data
+    -> values (119,'Karen','Colmenras','KCOLMENA',str_to_date('06,jul,87','%d,%b,%y'),'PU_CLERK ',2500,114,30);
+Query OK, 1 row affected (0.06 sec)
+
+MariaDB [Q2]> insert into data
+    -> values (120,'Matthew','Weis','MWEIS',str_to_date('08,jul,87','%d,%b,%y'),'ST_MAN ',8000,100,50);
+Query OK, 1 row affected (0.06 sec)
+
+MariaDB [Q2]> insert into data
+    -> values (121,'Adam','Fripp','AFRIPP',str_to_date('09,jul,87','%d,%b,%y'),'ST_MAN ',8200,100,50);
+Query OK, 1 row affected (0.05 sec)
+
+MariaDB [Q2]> insert into data
+    -> values (122,'Payam','Kaufling','PKAUFLIN',str_to_date('10,jul,87','%d,%b,%y'),'ST_MAN ',7900,100,50);
+Query OK, 1 row affected (0.05 sec)
+
+MariaDB [Q2]> insert into data
+    -> values (123,'Shanta','Vollman','SVOLLMAN',str_to_date('11,jul,87','%d,%b,%y'),'ST_MAN ',6500,100,50);
+Query OK, 1 row affected (0.06 sec)
+
+MariaDB [Q2]> select * from data;
++--------+------------+-----------+----------+------------+-------------+--------+------------+---------+
+| emp_id | first_name | last_name | email    | hire_date  | job_id      | salary | manager_id | dept_id |
++--------+------------+-----------+----------+------------+-------------+--------+------------+---------+
+|    100 | steven     | king      | sking    | 1987-06-17 | AD_PRES     |  24000 |          0 |      90 |
+|    101 | Neena      | kochhar   | Nkochhar | 1987-06-18 | AD_VP       |  17000 |        100 |      90 |
+|    102 | Lex        | De Haan   | LDEHAAN  | 1987-06-19 | AD_VP       |  17000 |        100 |      90 |
+|    103 | Alexander  | Hunold    | AHUNOLD  | 1987-06-20 | IT_PROG     |   9000 |        102 |      60 |
+|    104 | Bruce      | Ernst     | BERNST   | 1987-06-21 | IT_PROG     |   6000 |        103 |      60 |
+|    105 | David      | Austin    | DAUSTIN  | 1987-06-22 | IT_PROG     |   4800 |        103 |      60 |
+|    106 | Valli      | Pataballa | VPATABAL | 1987-06-23 | IT_PROG     |   4800 |        103 |      60 |
+|    107 | Diana      | Lorentz   | DLORENTZ | 1987-06-24 | IT_PROG     |   4200 |        103 |      60 |
+|    108 | Nancy      | Greenberg | NGREENBE | 1987-06-25 | FI_MGR      |  12000 |        101 |     100 |
+|    109 | Daniel     | Faviet    | DFAVIET  | 1987-06-26 | FI_ACCOUNT  |   9000 |        108 |     100 |
+|    110 | John       | Chen      | JCHEN    | 1987-06-27 | FI_ACCOUNT  |   8200 |        108 |     100 |
+|    111 | Ismael     | Sciarra   | ISCIARRA | 1987-06-28 | FI_ACCOUNT  |   7700 |        108 |     100 |
+|    112 | JoseManue  | Urman     | JMURMAN  | 1987-06-29 | FI_ACCOUNT  |   7800 |        108 |     100 |
+|    113 | Luis       | Popp      | LPOPP    | 1987-06-30 | FI_ACCOUNT  |   6900 |        108 |     100 |
+|    114 | Den        | Raphaely  | DRAPHEAL | 1987-07-01 | PU_MAN      |  11000 |        100 |      30 |
+|    115 | Alexander  | Khoo      | AKHOO    | 1987-07-02 | PU_CLERK    |   3100 |        114 |      30 |
+|    116 | Shelli     | Baida     | SBAIDA   | 1987-07-03 | PU_CLERK    |   2900 |        114 |      30 |
+|    117 | Sigal      | Tobias    | STOBIAS  | 1987-07-04 | PU_CLERK    |   2800 |        114 |      30 |
+|    118 | Guy        | Himuro    | GHIMURO  | 1987-07-05 | PU_CLERK    |   2600 |        114 |      30 |
+|    119 | Karen      | Colmenras | KCOLMENA | 1987-07-06 | PU_CLERK    |   2500 |        114 |      30 |
+|    120 | Matthew    | Weis      | MWEIS    | 1987-07-08 | ST_MAN      |   8000 |        100 |      50 |
+|    121 | Adam       | Fripp     | AFRIPP   | 1987-07-09 | ST_MAN      |   8200 |        100 |      50 |
+|    122 | Payam      | Kaufling  | PKAUFLIN | 1987-07-10 | ST_MAN      |   7900 |        100 |      50 |
+|    123 | Shanta     | Vollman   | SVOLLMAN | 1987-07-11 | ST_MAN      |   6500 |        100 |      50 |
++--------+------------+-----------+----------+------------+-------------+--------+------------+---------+
+24 rows in set (0.00 sec)
+
+MariaDB [Q2]> select count(*) as no_of_emp , sum(salary) as total_salary
+    ->        from data
+    ->        group by dept_id;
++-----------+--------------+
+| no_of_emp | total_salary |
++-----------+--------------+
+|         6 |        24900 |
+|         4 |        30600 |
+|         5 |        28800 |
+|         3 |        58000 |
+|         6 |        51600 |
++-----------+--------------+
+5 rows in set (0.00 sec)
+
+MariaDB [Q2]> select count(*) as number_of_employees from data group by dept_id,manager_id;
++---------------------+
+| number_of_employees |
++---------------------+
+|                   1 |
+|                   5 |
+|                   4 |
+|                   1 |
+|                   4 |
+|                   1 |
+|                   2 |
+|                   1 |
+|                   5 |
++---------------------+
+9 rows in set (0.00 sec)
+
+MariaDB [Q2]> select avg(salary) as avg_salary from data group by job_id;
++------------+
+| avg_salary |
++------------+
+| 24000.0000 |
+| 17000.0000 |
+|  7920.0000 |
+| 12000.0000 |
+|  5760.0000 |
+|  2780.0000 |
+| 11000.0000 |
+|  7650.0000 |
++------------+
+8 rows in set (0.00 sec)
+
+MariaDB [Q2]> select count(emp_id) as no_of_emp,manager_id from data group by manager_id order by no_of_emp desc limit 1;
++-----------+------------+
+| no_of_emp | manager_id |
++-----------+------------+
+|         7 |        100 |
++-----------+------------+
+1 row in set (0.00 sec)
+
+MariaDB [Q2]> select avg(salary) as avg_salaries from data group by job_id;
++--------------+
+| avg_salaries |
++--------------+
+|   24000.0000 |
+|   17000.0000 |
+|    7920.0000 |
+|   12000.0000 |
+|    5760.0000 |
+|    2780.0000 |
+|   11000.0000 |
+|    7650.0000 |
++--------------+
+8 rows in set (0.00 sec)
+
+MariaDB [Q2]> select count(*), manager_id from data group by manager_id order by count(*) asc;
++----------+------------+
+| count(*) | manager_id |
++----------+------------+
+|        1 |          0 |
+|        1 |        102 |
+|        1 |        101 |
+|        4 |        103 |
+|        5 |        108 |
+|        5 |        114 |
+|        7 |        100 |
++----------+------------+
+7 rows in set (0.00 sec)
+
+MariaDB [Q2]> select count(*) as number_of_managers, dept_id from data group by dept_id;
++--------------------+---------+
+| number_of_managers | dept_id |
++--------------------+---------+
+|                  6 |      30 |
+|                  4 |      50 |
+|                  5 |      60 |
+|                  3 |      90 |
+|                  6 |     100 |
++--------------------+---------+
+5 rows in set (0.00 sec)
+
+MariaDB [Q2]> select dept_id, count(*) as employees from data group by dept_id having count(*)>3;
++---------+-----------+
+| dept_id | employees |
++---------+-----------+
+|      30 |         6 |
+|      50 |         4 |
+|      60 |         5 |
+|     100 |         6 |
++---------+-----------+
+4 rows in set (0.00 sec)
+
+MariaDB [Q2]> select count(emp_id) as no_of_emp, dept_id from data group by dept_id order by no_of_emp desc limit 1;
++-----------+---------+
+| no_of_emp | dept_id |
++-----------+---------+
+|         6 |     100 |
++-----------+---------+
+1 row in set (0.00 sec)
+
+MariaDB [Q2]> select count(emp_id) as no_of_emp, dept_id from data group by dept_id order by no_of_emp asc limit 1;
++-----------+---------+
+| no_of_emp | dept_id |
++-----------+---------+
+|         3 |      90 |
++-----------+---------+
+1 row in set (0.00 sec)
